@@ -65,3 +65,9 @@
   font-size: 11px;
   color: #9d9ab0;
 }
+
+/* N2 intro lock: the NPC panel and its toggle are hidden whenever the shell is
+   not in gameplay yet. The class is released by `worldEntered`, so the panel
+   is never hidden in regular gameplay, including STASIS 1 dialogue. */
+body.intro-lock #npc-chat-panel,
+body.intro-lock #npc-chat-toggle { display: none; }

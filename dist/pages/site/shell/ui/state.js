@@ -33,7 +33,41 @@ export function createUiState(overrides = {}) {
     bindings: defaultBindings(),
     rebind: null,
     message: "",
+    // N2: an early Skip pressed while the engine/bridge is not ready yet. It is
+    // honoured exactly once, by the ready path, instead of entering PLAY over an
+    // engine that never received the skip.
+    pendingSkip: false,
+    // N2: true only after the shell has actually reached gameplay once (a
+    // successful Begin or the ready-path skip transition). The HUD/NPC lock is
+    // released by this flag, never by the PLAY screen alone.
+    worldEntered: false,
   };
+}
+
+// N2: mark the moment the shell really entered gameplay. The HUD/NPC safety
+// gate keys off this, so a PLAY screen raised before the world exists (or
+// during the opening STASIS 1 dialogue) never shows them.
+export function markWorldEntered(state) {
+  return state.worldEntered ? state : { ...state, worldEntered: true };
+}
+
+// N2: record that a Skip was requested before the bridge/engine was ready.
+export function requestPendingSkip(state) {
+  return state.pendingSkip ? state : { ...state, pendingSkip: true };
+}
+
+// N2: consume the pending Skip (exactly once).
+export function clearPendingSkip(state) {
+  return state.pendingSkip ? { ...state, pendingSkip: false } : state;
+}
+
+// N2: the single decision the safety gate asks. The HUD and the NPC panel are
+// hidden whenever the screen is not PLAY, or when PLAY is up but no game world
+// has been entered yet. After `worldEntered` they are NEVER hidden, including
+// during STASIS 1 dialogue.
+export function introLocked(state) {
+  if (state.screen !== SCREEN.PLAY) return true;
+  return state.worldEntered !== true;
 }
 
 export function navigate(state, screen) {

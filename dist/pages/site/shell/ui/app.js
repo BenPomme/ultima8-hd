@@ -9,7 +9,7 @@
 // localStorage ultima8.dev.mock=1 / window.__U8_DEV_MOCK__; it exists so the Node
 // suites and the UI-wiring harness can observe commands, never to fake
 // playability and never as the product default.
-import { createUiState, SCREEN, navigate, setPlayerName, commitPlayerName, setMode, setSetting, beginRebind, captureRebind, cancelRebind, keyToCommand, currentBindings, isPassthroughMode, engineSpeed, hudModel } from "./state.js";
+import { createUiState, SCREEN, navigate, setPlayerName, commitPlayerName, setMode, setSetting, beginRebind, captureRebind, cancelRebind, keyToCommand, currentBindings, isPassthroughMode, engineSpeed, hudModel, introLocked, markWorldEntered, requestPendingSkip, clearPendingSkip } from "./state.js";
 import { renderScreen } from "./screens.js";
 import { mountTouchControls, buttonAction, stickAction } from "./touch.js";
 import { createShellBridge, resolveBridgeMode } from "./bridge.js";
@@ -823,14 +823,26 @@ export function boot(win = window, doc = document) {
       if (readTextPrompt() === false) return;
       if (typeof bridge.rawKey === "function") { bridge.rawKey("Enter", true); bridge.rawKey("Enter", false); }
       state = commitPlayerName(state);
+      // N2: this IS the successful Begin that enters gameplay, so the HUD/NPC
+      // safety gate may release from here on (never before).
+      state = markWorldEntered(state);
       go(SCREEN.PLAY);
     },
     // Skip is the engine's REAL Escape: the intro/prompt is dismissed by its
     // own keymapper, exactly as a native key would.
+    //
+    // N2: an EARLY Skip (the bridge/engine is not ready yet) must not enter PLAY
+    // over an engine that never received the skip. It is remembered instead, the
+    // intro screen stays up with its Skip control visibly "skipping…", and the
+    // ready path runs the SAME logic below once the engine is up. Escape and the
+    // button share this one entry point.
     skipIntro: () => {
-      if (typeof bridge.rawKey === "function") { bridge.rawKey("Escape", true); bridge.rawKey("Escape", false); }
-      state = commitPlayerName(state);
-      go(SCREEN.PLAY);
+      if (!engineReady()) {
+        state = requestPendingSkip(state);
+        render();
+        return;
+      }
+      runReadySkip();
     },
     openSettings: () => openSub(SCREEN.SETTINGS),
     openControls: () => openSub(SCREEN.REBIND),
@@ -885,6 +897,37 @@ export function boot(win = window, doc = document) {
     cancelMusicDownload,
     confirmMusicRestart,
   };
+
+  // N2: the bridge/engine is "ready" enough to accept the native skip only once
+  // a real world phase has been reached. A mock bridge (dev/tests) is always
+  // ready so the flow cannot deadlock there.
+  function engineReady() {
+    if (bridge.mode !== "real") return true;
+    return bridge.isWorld() === true;
+  }
+
+  // N2: the ONE ready-path skip, run by an in-time Skip AND by the deferred one
+  // when the bridge becomes ready. It sends the native skip, then follows the
+  // EXISTING NAME/PLAY transition driven by readTextPrompt(): the engine's own
+  // prompt still owns the name, so the shell reopens the accessible proxy while
+  // it is live and only enters gameplay once it is not.
+  function runReadySkip() {
+    state = clearPendingSkip(state);
+    if (typeof bridge.rawKey === "function") { bridge.rawKey("Escape", true); bridge.rawKey("Escape", false); }
+    state = commitPlayerName(state);
+    if (readTextPrompt() === true) { state = navigate(state, SCREEN.NAME); render(); return; }
+    if (readTextPrompt() === null) { state = markWorldEntered(state); go(SCREEN.PLAY); return; }
+    awaitPromptSince = Date.now();   // stay on intro ("skipping…"); pollTick decides
+    render();
+  }
+  let awaitPromptSince = 0;
+
+  // N2: the deferred skip lands here the moment the engine reports a world.
+  function flushPendingSkip() {
+    if (!state.pendingSkip) return;
+    if (!engineReady()) return;
+    runReadySkip();
+  }
 
   // "Movable world" is NOT the READY flag alone: READY is 1 during the intro,
   // and STASIS stays 1 until the player actually leaves the opening conversation.
@@ -1000,9 +1043,14 @@ export function boot(win = window, doc = document) {
     // Pointer passthrough: only the live PLAY screen lets clicks reach the
     // engine iframe underneath; every other screen keeps #app interactive.
     doc.body.classList.toggle("engine-play", state.screen === SCREEN.PLAY);
+    // N2 safety gate: the HUD and the NPC panel (+ its toggle) are hidden by
+    // this body class whenever the screen is not PLAY, or when PLAY is up but no
+    // game world has been entered yet. After worldEntered it is NEVER applied,
+    // so regular STASIS 1 dialogue keeps both visible.
+    doc.body.classList.toggle("intro-lock", introLocked(state));
     fx.classList.toggle("live", playlike);
     renderScreen({ ...state, message, textPrompt, hudEngine, audio: readAudio(), music: musicPanel(), art: artPanel(), musicConfirm: state.musicConfirm,
-      clickMoveAvailable: clickEnv.available, clickMoveTouch: clickEnv.touch }, A);
+      clickMoveAvailable: clickEnv.available, clickMoveTouch: clickEnv.touch, pendingSkip: state.pendingSkip }, A);
     mountTouch();
     updateOrientation();
     if (engineActive) mountEngine();
@@ -1022,6 +1070,14 @@ export function boot(win = window, doc = document) {
   // typing intact across polls.
   function pollTick() {
     readEngine();
+    if (awaitPromptSince) {
+      const p = readTextPrompt();
+      if (p === true) { awaitPromptSince = 0; state = navigate(state, SCREEN.NAME); render(); return; }
+      if (p === null || Date.now() - awaitPromptSince > 10000) {
+        awaitPromptSince = 0; state = markWorldEntered(state); go(SCREEN.PLAY); return;
+      }
+      return;
+    }
     updateAudioUi();
     const playlike = isPlaylike(state.screen);
     if (playlike) updateHud();
@@ -1085,6 +1141,9 @@ export function boot(win = window, doc = document) {
     if (phase === "error") { setMessage(bridge.error || "The game engine did not load."); return; }
     if (phase === "world") {
       try { frameFilter?.attach(); } catch { /* filter is best-effort */ }
+      // N2: an early Skip waited for exactly this moment. Run the existing
+      // ready-path skip logic now (native skip -> NAME/PLAY transition).
+      flushPendingSkip();
       // Apply the persisted mode and the labelled travel speed once, on READY.
       try { bridge.setMode?.(state.settings.mode); } catch { /* ignore */ }
       applyEngineSpeed();

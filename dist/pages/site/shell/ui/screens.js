@@ -89,7 +89,9 @@ function nameScreen(state, A) {
     field("Name", input, waiting ? T.nameWaiting : T.nameHint),
     el("div", { class: "stack row" },
       button(T.nameContinue, A.submitName, { class: "primary", test: "begin", disabled: waiting }),
-      button(T.skipIntro, A.skipIntro, { test: "skip" })),
+      button(state.pendingSkip ? "Skipping…" : T.skipIntro, A.skipIntro, {
+        test: "skip", disabled: state.pendingSkip === true,
+      })),
     button(T.back, A.back));
   return mount(state.root, form);
 }

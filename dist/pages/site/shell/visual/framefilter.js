@@ -396,12 +396,13 @@ export function mountFrameFilter(iframe, options = {}) {
   // frame, and throws on a hard capture failure (e.g. a tainted canvas) so the
   // caller can fail open instead of pretending the frame is fine.
   function sourceHasContent(canvas, srcW, srcH) {
-    if (!probeCtx) return true; // cannot judge; assume the GPU path is fine
-    const n = Math.min(srcW, 16);
-    const m = Math.min(srcH, 16);
-    probeScratch.width = srcW; probeScratch.height = srcH;
-    probeCtx.clearRect(0, 0, srcW, srcH);
-    probeCtx.drawImage(canvas, 0, 0, srcW, srcH);
+    if (!probeCtx) return true;
+    const n = Math.min(srcW, 16), m = Math.min(srcH, 16);
+    const sx = Math.max(0, Math.floor(srcW / 2 - n / 2));
+    const sy = Math.max(0, Math.floor(srcH / 2 - m / 2));
+    probeScratch.width = n; probeScratch.height = m;
+    probeCtx.clearRect(0, 0, n, m);
+    probeCtx.drawImage(canvas, sx, sy, n, m, 0, 0, n, m);
     const px = probeCtx.getImageData(0, 0, n, m).data;
     for (let i = 0; i < px.length; i += 4) if (isLit(px.subarray(i, i + 4))) return true;
     return false;

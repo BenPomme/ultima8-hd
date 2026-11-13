@@ -14,8 +14,8 @@
     {
       "path": "NOTICE.md",
       "category": "other",
-      "size": 2911,
-      "sha256": "92440061b7eacc9091692042e312bae01a960067607f9e08ce3149baa263fd1a"
+      "size": 2989,
+      "sha256": "cc611637b45e57163fe2408760bf3aaadb1ed82d8e03b9d745aa2ac568040952"
     },
     {
       "path": "PLAYER-README.md",
@@ -62,8 +62,8 @@
     {
       "path": "scummvm.html",
       "category": "engine",
-      "size": 4044,
-      "sha256": "367c1f1b90f66fa30fc05312e767ad17300a2bf90d357f292131f99a90f673b9"
+      "size": 4416,
+      "sha256": "bad6a08363e545ee4c28bf7bf2f776e1d59260b80db313ad3f144fdc8e1978ac"
     },
     {
       "path": "scummvm.html.symbols",
@@ -86,8 +86,8 @@
     {
       "path": "scummvm.wasm",
       "category": "engine",
-      "size": 12196358,
-      "sha256": "63d85168ecd7b5e9372e44494765c72dc08f1097de60e13234d649c5254adafb"
+      "size": 12199062,
+      "sha256": "ad9e7ff4e128917e40a09139621238113188dc37b3cb10ccda76874cfe9bbb97"
     },
     {
       "path": "ultima8-bridge.js",
@@ -116,8 +116,8 @@
     {
       "path": "shell/ui/app.js",
       "category": "shell",
-      "size": 56527,
-      "sha256": "8ee92fe51c0701133cccc4e1e3a4696251cb918db1468c4cbbdb1771dd16b3ec"
+      "size": 59469,
+      "sha256": "63c8aa999a6ee9c116cb31e21f371e144db5a0febf8951f1f10390cda488fd41"
     },
     {
       "path": "shell/ui/bridge.js",
@@ -170,20 +170,20 @@
     {
       "path": "shell/ui/screens.js",
       "category": "shell",
-      "size": 17089,
-      "sha256": "7c30f18444d29d857290020d19683ac7f2fcaf20bdde61b1cde944ebee2d267f"
+      "size": 17178,
+      "sha256": "ba054fe83d7d98435262fd15aa5c2baba970062317f2bd3019abb4c9eeb0c756"
     },
     {
       "path": "shell/ui/state.js",
       "category": "shell",
-      "size": 5232,
-      "sha256": "aa8c0adbbaeaf700258cb9647401e7e4c5c2a5cb43f9d6a148429f7ada74741d"
+      "size": 6784,
+      "sha256": "28318bf88cf8db684317a0128c9b279edbcec5018b7bf44266aa0d2f0af78647"
     },
     {
       "path": "shell/ui/theme.css",
       "category": "shell",
-      "size": 14065,
-      "sha256": "a4932e426c883dec4212fcaf87efd63cea61e190f766577a01a4a2113fc7ad33"
+      "size": 14527,
+      "sha256": "271f02ebdaab7a945cbc818c8ba6e981d663e40a92cc79658335f7bb0cafc90b"
     },
     {
       "path": "shell/ui/touch.js",
@@ -302,8 +302,8 @@
     {
       "path": "shell/visual/framefilter.js",
       "category": "shell",
-      "size": 26207,
-      "sha256": "ec676d889008dc24e7774e5663a282fab4f9d37a33658a32c691be99a4f64060"
+      "size": 26264,
+      "sha256": "b3662c8e2da010ba3580774f597e992186ad9c9c93490061ca563e962b8dd206"
     },
     {
       "path": "shell/visual/scale2x.js",
@@ -362,8 +362,8 @@
     {
       "path": "shell/npc/panel.css",
       "category": "shell",
-      "size": 1719,
-      "sha256": "7aa0af24fce120497f1a2847a5878a5861eff4326ee6c1d5552c488321397893"
+      "size": 2035,
+      "sha256": "ec9ab4a59a4bbdcd8b54d23b265cf6eee0f0c1b4c73b81393d6853424dce53de"
     },
     {
       "path": "shell/npc/panel.js",
@@ -458,8 +458,8 @@
     {
       "path": "docs/release/licence/NOTICE.md",
       "category": "packaging",
-      "size": 2911,
-      "sha256": "92440061b7eacc9091692042e312bae01a960067607f9e08ce3149baa263fd1a"
+      "size": 2989,
+      "sha256": "cc611637b45e57163fe2408760bf3aaadb1ed82d8e03b9d745aa2ac568040952"
     },
     {
       "path": "docs/release/licence/copyright",
@@ -476,8 +476,8 @@
     {
       "path": "docs/release/licence/scummvm-source-offer.md",
       "category": "packaging",
-      "size": 5531,
-      "sha256": "60aa18a5bd4a73a9e939e2d1b94047a55337061e9060700468bce534dd56c776"
+      "size": 5609,
+      "sha256": "c3b11f35b85c62a3f0f0a0b72b48b54d0ca7c9e77cc685865331232d88a869e2"
     },
     {
       "path": "docs/release/licence/soundfonts.md",

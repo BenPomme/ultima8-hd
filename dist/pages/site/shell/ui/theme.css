@@ -326,6 +326,14 @@ body.engine-play .app { pointer-events: none; }
 }
 .u8-tap-sound.on { pointer-events: auto; opacity: 1; }
 
+/* --- N2 intro lock ------------------------------------------------------- */
+/* While the screen is not PLAY, or PLAY is up before any game world has been
+   entered, the HUD and the NPC panel (+ its toggle) are hidden. `worldEntered`
+   releases this class for good, so regular STASIS 1 dialogue keeps them. */
+body.intro-lock #u8-hud { display: none; }
+body.intro-lock #npc-chat-panel { display: none; }
+body.intro-lock #npc-chat-toggle { display: none; }
+
 /* --- Music source panel + restart confirm -------------------------------- */
 .music-panel .segmented .btn
   { font-size: 0.9rem; }

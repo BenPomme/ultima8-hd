@@ -1,0 +1,10 @@
+patches/ultima-pagan-modern-cumulative-20261113-929be8852be2.patch	historical build provenance; no credentials
+scummvm/devtools/ultima8/build_midpoint_pack.py	historical build provenance; no credentials
+scummvm/dists/emscripten/assets/ultima8-bridge.js	historical build provenance; no credentials
+scummvm/shell/contract/README.md	historical build provenance; no credentials
+scummvm/shell/contract/bridge-v1.1-delta.json	historical build provenance; no credentials
+scummvm/shell/contract/bridge-v1.2-delta.json	historical build provenance; no credentials
+scummvm/shell/contract/bridge-v1.3-delta.json	historical build provenance; no credentials
+scummvm/shell/contract/bridge-v1.json	historical build provenance; no credentials
+scummvm/shell/tools/gen-contract.mjs	historical build provenance; no credentials
+scummvm/shell/ui/contract.js	historical build provenance; no credentials
