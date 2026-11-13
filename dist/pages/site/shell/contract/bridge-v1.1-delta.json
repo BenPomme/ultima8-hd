@@ -1,0 +1,126 @@
+{
+  "delta_of": "ultima8-engine-bridge v1 (contracts/bridge-v1.json)",
+  "applies_from": "E2 combat integration (CP8/CP12); E2b host-fight QA (CP13)",
+  "kind": "additive",
+  "no_frozen_member_changed": true,
+  "canonical_contract_path": ".scratch/contracts/bridge-v1.json",
+  "worktree_contract_copy": "T2-wasm-build-spike/contracts/bridge-v1.json",
+  "host_action": "copy this worktree contracts/bridge-v1.json AND contracts/bridge-v1.1-delta.json to the canonical .scratch/contracts path",
+  "changes": {
+    "state_fields": {
+      "added": {
+        "KERNEL_FRAME": 24,
+        "TARGET_ID": 25,
+        "TARGET_HP": 26,
+        "TARGET_MAX_HP": 27,
+        "TARGET_ALIVE": 28,
+        "TARGET_WORLD_X": 29,
+        "TARGET_WORLD_Y": 30,
+        "TARGET_WORLD_Z": 31,
+        "TARGET_SCREEN_X": 32,
+        "TARGET_SCREEN_Y": 33,
+        "TARGET_SCREEN_OK": 34,
+        "FIXTURE_ID": 35,
+        "FIXTURE_SPAWNS": 36,
+        "FIXTURE_SHAPE": 37,
+        "FIXTURE_HP_CAP": 38
+      },
+      "meaning": "KERNEL_FRAME(24) = actual 30 Hz Kernel::getFrameNum() gameplay tick; FRAME(19) remains the ~84/s render-loop pass counter. TARGET_* (25..34) = read-only report of the nearest hostile Actor the avatar is fighting near (real engine alignment predicate; neutral actors such as Devon never match). TARGET_SCREEN_X/Y (32/33) are GameMapGump::GetLocationOfItem(...,256) 'feet' coords in engine-logical screen space == what gesture() takes; TARGET_SCREEN_OK(34) is the validity flag. FIXTURE_* (35..38) are QA-only bookkeeping for the dev-gated hostile fixture.",
+      "indices_unchanged": "0..24 keep their E1/v1.1 meaning; all new fields are appended."
+    },
+    "fixture_hook": {
+      "gated_by": "global.Module.__bridgeQAFixture === true (engine-side EM_JS check, inert otherwise; non-Emscripten builds always false)",
+      "js_api": "Ultima8Bridge.fixture.available() / .stageHostile(shape, hpCap) / .clear()",
+      "cpp_exports": [
+        "bridge_fixture_available()",
+        "bridge_fixture_stage_hostile(shape,hpCap)",
+        "bridge_fixture_clear()"
+      ],
+      "debugger": "Combat::stageHostile [shape] [hpCap]  (default hpCap 24; shape 0 = auto-pick a real melee monster)",
+      "semantics": "Spawns exactly ONE real Actor via ItemFactory::createActor mirroring MonsterEgg::hatch, applies the game's real MonsterInfo stats (loadMonsterStats), places it on the first canExistAt-valid adjacent tile, pins BOTH alignment directions for guaranteed hostility, and attaches a real CombatProcess targeting the avatar. No damage is fabricated; all HP changes must come from the engine's own AI/collision/animation/combat pipeline. A new stage destroys the previous fixture first (bounded to one).",
+      "not_gameplay": "Never reachable from normal play; exists only so a host QA run can stage a real hostile without the normal save."
+    },
+    "commands_added": {
+      "STAGE_HOSTILE": 7,
+      "CLEAR_FIXTURE": 8
+    },
+    "engine_event_stream": {
+      "types_added": {
+        "SAVE_RESULT": 7,
+        "LOAD_RESULT": 8
+      },
+      "types_unchanged": {
+        "HIT": 1,
+        "BLOCK": 2,
+        "HURT": 3,
+        "DEATH": 4,
+        "ATTACK_START": 5,
+        "ATTACK_END": 6
+      },
+      "js_hook_before": "Module.bridgeOnEngineEvent = (type, a, b, c) => {}",
+      "js_hook_now": "Module.bridgeOnEngineEvent = (type, a, b, c, d, frame) => {}",
+      "compat": "E1 consumers that read (type,a,b,c) keep working; d and frame are appended.",
+      "payload_by_type": {
+        "HIT": [
+          "attackerId",
+          "targetId",
+          "damage",
+          "damageType"
+        ],
+        "BLOCK": [
+          "targetId(blocker)",
+          "attackerId",
+          "damageThrough",
+          "damageType"
+        ],
+        "HURT": [
+          "targetId",
+          "attackerId",
+          "hpLost",
+          "hpAfter"
+        ],
+        "DEATH": [
+          "targetId",
+          "attackerId",
+          "damage",
+          "damageType"
+        ],
+        "ATTACK_START": [
+          "actorId",
+          "Animation::Sequence",
+          "0",
+          "0"
+        ],
+        "ATTACK_END": [
+          "actorId",
+          "Animation::Sequence",
+          "0",
+          "0"
+        ],
+        "SAVE_RESULT": [
+          "slot",
+          "ok(0|1)",
+          "0",
+          "0"
+        ],
+        "LOAD_RESULT": [
+          "slot",
+          "ok(0|1)",
+          "0",
+          "0"
+        ]
+      },
+      "frame_field": "6th arg: Kernel::getFrameNum() at emission, for input-latency measurement"
+    },
+    "save_semantics": {
+      "save_result_event": "CMD_SAVE now captures Common::Error and enqueues SAVE_RESULT(slot, ok). Enqueue-return 1 is still NOT success.",
+      "load_result_event": "CMD_LOAD enqueues LOAD_RESULT(slot, ok).",
+      "durability": "await Ultima8Bridge.flushPersist() (real FS.syncfs callback) for durable persistence; SAVE_RESULT ok covers the engine write, flushPersist covers IndexedDB."
+    }
+  },
+  "build": {
+    "wasm_md5_combat_build_e2": "d2a01f7a26c3e4e96abf783c9952d0df",
+    "wasm_md5_combat_build_e2b": "21ebe66b233ad22571b7bc7276a3f94a",
+    "full_patch": "T2-wasm-build-spike/patches/T2-combat-E2.patch"
+  }
+}

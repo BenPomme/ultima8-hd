@@ -1,0 +1,315 @@
+{
+  "contract": "ultima8-engine-bridge",
+  "version": 1,
+  "status": "frozen",
+  "frozen_at": "2026-11-11",
+  "author": "T2 (sole engine writer / build owner)",
+  "engine": {
+    "project": "ScummVM (Ultima VIII: Pagan, engine id ultima8)",
+    "pin": "929be8852be275b23c1cf9a8b036d262a236e8af",
+    "sdk": "emscripten 4.0.10 (dists/emscripten/emsdk-4.0.10)",
+    "served_at": "http://127.0.0.1:8099/",
+    "canonical_contract_path": ".scratch/contracts/bridge-v1.json",
+    "worktree_copy": "T2-wasm-build-spike/contracts/bridge-v1.json",
+    "wasm_md5_bridge_build": "7b48d047080274a0c067202aac539548",
+    "baseline_wasm_md5": "d82d622a81044d8291e0f4fd2e389480",
+    "bridge_source": [
+      "engines/ultima/ultima8/ultima8_bridge.cpp",
+      "engines/ultima/ultima8/ultima8_bridge.h"
+    ],
+    "full_patch": "T2-wasm-build-spike/patches/T2-engine-bridge-E1.patch",
+    "shell_glue": "dists/emscripten/assets/ultima8-bridge.js (auto-copied to build-emscripten/ by dist-emscripten)",
+    "shell_glue_loaded_by": "dists/emscripten/custom_shell.html (script tag after scummvm.js)",
+    "js_facade_global": "window.Ultima8Bridge",
+    "canonical_contract_writable": false,
+    "canonical_contract_note": ".scratch/contracts is read-only in the worker sandbox (EPERM); this worktree copy is authoritative until the host copies it to the canonical path."
+  },
+  "design_rules": [
+    "JS entry points only ENQUEUE work or READ cached state; they never re-enter a mutating engine object while Asyncify has the wasm suspended.",
+    "All commands are drained by the engine at the frame boundary (Ultima8Engine::handleDelayedEvents -> ultima8BridgeProcessFrame).",
+    "Engine events (custom engine actions, mouse) are enqueued through Common::EventManager::pushEvent and drained by the normal per-frame pollEvent loop.",
+    "The queue is bounded; overflow is counted and dropped, never blocked."
+  ],
+  "readiness": {
+    "export": "_bridge_ready",
+    "returns": "1 once the engine has an initialised world/avatar; 0 before. Poll from JS; do not call other exports before it returns 1.",
+    "module_global": "Module",
+    "export_prefix": "Module._bridge_",
+    "frame_export": "_bridge_frame"
+  },
+  "event_types": {
+    "KEYDOWN": 1,
+    "KEYUP": 2,
+    "MOUSEMOVE": 3,
+    "LBUTTONDOWN": 4,
+    "LBUTTONUP": 5,
+    "RBUTTONDOWN": 6,
+    "RBUTTONUP": 7,
+    "MBUTTONDOWN": 13,
+    "MBUTTONUP": 14,
+    "CUSTOM_ENGINE_ACTION_START": 20,
+    "CUSTOM_ENGINE_ACTION_END": 21
+  },
+  "mouse_buttons": {
+    "left": 0,
+    "right": 1,
+    "middle": 2
+  },
+  "keybinding_actions": {
+    "QUICKSAVE": 0,
+    "SAVE": 1,
+    "LOAD": 2,
+    "BEDROLL": 3,
+    "COMBAT": 4,
+    "BACKPACK": 5,
+    "KEYRING": 6,
+    "MINIMAP": 7,
+    "RECALL": 8,
+    "INVENTORY": 9,
+    "NEXT_WEAPON": 10,
+    "NEXT_INVENTORY": 11,
+    "USE_INVENTORY": 12,
+    "USE_MEDIKIT": 13,
+    "USE_ENERGYCUBE": 14,
+    "SELECT_ITEMS": 15,
+    "DETONATE_BOMB": 16,
+    "DROP_WEAPON": 17,
+    "USE_SELECTION": 18,
+    "GRAB_ITEMS": 19,
+    "MENU": 20,
+    "CLOSE_GUMPS": 21,
+    "HIGHLIGHT_ITEMS": 22,
+    "TOGGLE_TOUCHING": 23,
+    "JUMP": 24,
+    "SHORT_JUMP": 25,
+    "TURN_LEFT": 26,
+    "TURN_RIGHT": 27,
+    "MOVE_FORWARD": 28,
+    "MOVE_BACK": 29,
+    "MOVE_UP": 30,
+    "MOVE_DOWN": 31,
+    "MOVE_LEFT": 32,
+    "MOVE_RIGHT": 33,
+    "MOVE_RUN": 34,
+    "MOVE_STEP": 35,
+    "ATTACK": 36,
+    "STEP_LEFT": 37,
+    "STEP_RIGHT": 38,
+    "STEP_FORWARD": 39,
+    "STEP_BACK": 40,
+    "ROLL_LEFT": 41,
+    "ROLL_RIGHT": 42,
+    "TOGGLE_CROUCH": 43,
+    "CAMERA_AVATAR": 44,
+    "CLIPPING": 45,
+    "DEC_SORT_ORDER": 46,
+    "INC_SORT_ORDER": 47,
+    "MOVE_ASCEND": 48,
+    "MOVE_DESCEND": 49,
+    "TOGGLE_PAINT": 50,
+    "FRAME_BY_FRAME": 51,
+    "ADVANCE_FRAME": 52,
+    "TOGGLE_STASIS": 53,
+    "SHAPE_VIEWER": 54,
+    "NONE": 55
+  },
+  "binding_semantics": {
+    "movement": "8-way = hold MOVE_UP/DOWN/LEFT/RIGHT (30-33); diagonals hold two actions; always-run is MOVE_RUN (34).",
+    "attack": "U8 has NO attack key. ATTACK(36) is CRUSADER-ONLY and MUST NOT be emitted for ultima8. U8 attack = left-button double-click over target.",
+    "kick": "U8 kick = right-button double-click.",
+    "block": "U8 block = hold left button; release ends block.",
+    "use": "world object left double-click; look single left click; move middle click; pick-up = left drag.",
+    "double_click_window_ms": 400,
+    "note": "A double-click needs two real button-downs separated by real frame time inside the window; never emit two down/up pairs inside a single poll."
+  },
+  "commands": {
+    "CMD_SAVE": 1,
+    "CMD_LOAD": 2,
+    "CMD_PAUSE": 3,
+    "CMD_SET_MODE": 4,
+    "CMD_SET_OPTION": 5,
+    "CMD_RESET_INBOX": 6
+  },
+  "modes": {
+    "modern": 0,
+    "classic": 1
+  },
+  "speed": {
+    "setter": "_bridge_set_speed(double multiplier)",
+    "range": [
+      0.25,
+      4.0
+    ],
+    "engine_mapping": "_animationRate = round(100 / multiplier) (100 == 1.0x, 30fps)",
+    "enforcement": "Bridge forces _animationRate=100 (1.0x) while in combat or in Classic mode, regardless of the requested multiplier; Modern out-of-combat applies the multiplier."
+  },
+  "gestures": {
+    "BLOCK_HOLD": 1,
+    "ATTACK_DOUBLECLICK_LEFT": 2,
+    "KICK_DOUBLECLICK_RIGHT": 3,
+    "COMBAT_TOGGLE_DOUBLECLICK_RIGHT_ON_AVATAR": 4,
+    "USE_DOUBLECLICK_LEFT": 5,
+    "LOOK_SINGLECLICK_LEFT": 6,
+    "MOVE_SINGLECLICK_MIDDLE": 7,
+    "PICK_UP_DRAG_LEFT": 8
+  },
+  "state_fields": {
+    "WORLD_X": 0,
+    "WORLD_Y": 1,
+    "WORLD_Z": 2,
+    "IN_COMBAT": 3,
+    "STASIS": 4,
+    "CONTROLLED": 5,
+    "DEAD": 6,
+    "HP": 7,
+    "MAX_HP": 8,
+    "MANA": 9,
+    "MAX_MANA": 10,
+    "STR": 11,
+    "DEX": 12,
+    "INT": 13,
+    "MAP_NUM": 14,
+    "AVATAR_MAP_NUM": 15,
+    "SPEED_RATE": 16,
+    "SPEED_MULT": 17,
+    "MODE": 18,
+    "FRAME": 19,
+    "READY": 20,
+    "INVENTORY_COUNT": 21,
+    "QUEUE_DROPPED": 22,
+    "TRAVEL_SPEED_ACTIVE": 23,
+    "KERNEL_FRAME": 24
+  },
+  "inventory_fields": {
+    "SHAPE": 0,
+    "FRAME": 1,
+    "QUALITY": 2,
+    "QUANTITY": 3,
+    "OBJ_ID": 4,
+    "PARENT": 5
+  },
+  "exports": {
+    "int _bridge_push_event(int type, int a, int b, int c, int d)": "enqueue one Common::Event. mouse: a=x,b=y; custom action: a=action; key: a=keycode,b=ascii,c=flags. Returns 1 accepted / 0 rejected.",
+    "int _bridge_engine_action(int action, int down)": "enqueue CUSTOM_ENGINE_ACTION_START(down=1)/END(down=0); action validated 0..55. Returns 1/0.",
+    "int _bridge_queue_command(int cmd, int a, int b)": "enqueue a simple command (save/load/pause/mode/option). Returns 1/0.",
+    "int _bridge_set_speed(double multiplier)": "set Modern travel multiplier (clamped 0.25..4); 0 if not finite.",
+    "int _bridge_set_mode(int mode)": "0 modern, 1 classic. Returns previous mode.",
+    "int _bridge_gesture(int kind, int x, int y, int hold)": "enqueue a timed U8 pointer gesture; hold=1 press/start, hold=0 release (block). Returns 1/0.",
+    "int _bridge_read_state(int field)": "return the cached int for state_fields (refreshed every frame). No engine re-entry.",
+    "int _bridge_inventory_count()": "number of cached inventory entries.",
+    "int _bridge_inventory_entry(int index, int field)": "cached inventory field for entry (inventory_fields).",
+    "int _bridge_get_name_ptr()": "pointer to UTF8 avatar name (valid until next frame).",
+    "int _bridge_export_save(int slot)": "read save slot via SaveFileManager into a bridge buffer; returns pointer (0 on failure).",
+    "int _bridge_export_size()": "byte length of the last successful export.",
+    "int _bridge_alloc(int size)": "malloc for import payload; returns pointer.",
+    "int _bridge_import_save(int slot, int ptr, int size)": "write ptr[0..size) as the save slot file via SaveFileManager; returns 1/0.",
+    "int _bridge_syncfs()": "flush IndexedDB (IDBFS) persistence; returns 1.",
+    "int _bridge_ready()": "1 once world/avatar initialised.",
+    "int _bridge_frame()": "frames drained so far.",
+    "void _bridge_emit_event(int type, int a, int b, int c)": "combat event publisher hook (see engine_event_stream). E1 has no call sites (harmless no-op)."
+  },
+  "engine_event_stream": {
+    "status": "LIVE in E2 (combat + real save/load completion). Types 1-6 unchanged from the frozen E1 interface; 7-8 are the additive v1.1 delta.",
+    "purpose": "shell feedback for the upcoming combat patch (E2): hit / block / hurt / death.",
+    "types": {
+      "HIT": 1,
+      "BLOCK": 2,
+      "HURT": 3,
+      "DEATH": 4,
+      "ATTACK_START": 5,
+      "ATTACK_END": 6,
+      "SAVE_RESULT": 7,
+      "LOAD_RESULT": 8
+    },
+    "transport": "C++ ModernCombat sink -> enqueue (engine thread) -> drained once per frame -> Module.bridgeOnEngineEvent(type,a,b,c,d,frame). Serial save/load results are enqueued from the CMD_SAVE/CMD_LOAD drain.",
+    "js_hook": "Module.bridgeOnEngineEvent = (type, a, b, c, d, frame) => { ... }",
+    "args": {
+      "note": "Additive v1.1: the L2 EventSink payload is (name,a0,a1,a2,a3); all four ints are forwarded faithfully as (a,b,c,d). `frame` is the real kernel frame at emission.",
+      "by_type": {
+        "HIT (1)": {
+          "a": "attackerId",
+          "b": "targetId",
+          "c": "damage (final, >0)",
+          "d": "damageType"
+        },
+        "BLOCK (2)": {
+          "a": "targetId (blocker)",
+          "b": "attackerId",
+          "c": "damageThrough (post block+armour)",
+          "d": "damageType"
+        },
+        "HURT (3)": {
+          "a": "targetId",
+          "b": "attackerId",
+          "c": "hpLost",
+          "d": "hpAfter (0 when lethal)"
+        },
+        "DEATH (4)": {
+          "a": "targetId",
+          "b": "attackerId",
+          "c": "damage",
+          "d": "damageType"
+        },
+        "ATTACK_START (5)": {
+          "a": "actorId",
+          "b": "Animation::Sequence (attack|kick)",
+          "c": "0",
+          "d": "0"
+        },
+        "ATTACK_END (6)": {
+          "a": "actorId",
+          "b": "Animation::Sequence (attack|kick)",
+          "c": "0",
+          "d": "0"
+        },
+        "SAVE_RESULT (7)": {
+          "a": "slot",
+          "b": "ok (1=engine kNoError, 0=failed/refused)",
+          "c": "0",
+          "d": "0"
+        },
+        "LOAD_RESULT (8)": {
+          "a": "slot",
+          "b": "ok (1=engine kNoError, 0=failed)",
+          "c": "0",
+          "d": "0"
+        }
+      },
+      "a": "primary actor/objId (for HIT the attacker; for BLOCK/HURT/DEATH the target)",
+      "b": "secondary (see by_type)",
+      "c": "reserved / 3rd payload int",
+      "d": "4th payload int (additive v1.1)",
+      "frame": "kernel frame at emission (additive v1.1)"
+    },
+    "js_hook_additive": "The hook signature is additive: E1 consumers written as (type,a,b,c) keep working; d (4th L2 payload int) and frame (Kernel::getFrameNum(), 30 Hz tick) are appended args.",
+    "attack_events_boundary": "ATTACK_START/ATTACK_END are emitted by ActorAnimProcess at the real attack/kick animation start (init) and end (terminate), never at the input gesture. Enabled by FLAG_ATTACK_EVENTS in BOTH Modern and Classic (instrumentation only; no gameplay change) so attack-press->animation-start latency is measurable per profile."
+  },
+  "save_semantics": {
+    "slot_naming": "Engine::getSaveStateName(slot) -> '<target>.NNN'",
+    "persistence": "IDBFS mounted at HOME with autoPersist; bridge also calls FS.syncfs after save/import.",
+    "export_import": "byte-exact save file round-trip via SaveFileManager; hash-stable.",
+    "queued_not_saved": "Ultima8Bridge.save(slot) only ENQUEUES CMD_SAVE (returns 1 = queued). The engine performs the write at the next frame boundary (Ultima8Engine::handleDelayedEvents); the return value is NOT proof the file was written. Poll snapshot().WORLD_X stability or re-export to confirm the slot exists.",
+    "syncfs_async": "The C++ _bridge_syncfs() returns 1 synchronously while FS.syncfs(false, cb) is still in flight; its callback is currently empty, so a queued save/import is NOT durable-to-IndexedDB when that call returns.",
+    "durable_completion": "Additive (JS-only) Ultima8Bridge.flushPersist() -> Promise<boolean> resolves against the REAL FS.syncfs completion callback; await it when UI durability (survives reload) is required. It does not fabricate a save result, only a persistence flush result.",
+    "save_failure_visibility": "RESOLVED in E2 (additive): CMD_SAVE/CMD_LOAD capture the real Common::Error and enqueue SAVE_RESULT(7)/LOAD_RESULT(8) with ok=1 only on kNoError. The shell must still not treat save()==1 (enqueue) as success; wait for SAVE_RESULT ok==1 AND await flushPersist() for durability."
+  },
+  "runtime_notes": {
+    "heap_views_not_on_module": "On the real dist build the Emscripten typed-array views (HEAP8/HEAPU8/...) are top-level vars in scummvm.js and are NOT assigned to Module, so Module.HEAPU8 is undefined. The glue resolves the live view from Module.HEAPU8 if present, else the global HEAPU8.",
+    "memory_growth_stale_views": "updateMemoryViews() REPLACES the global view vars on every wasm memory growth (detaching the old ArrayBuffer). The glue re-resolves the current view at each call and never caches a view across an allocation. exportSave returns a JS copy (never a heap alias); importSave re-resolves after _bridge_alloc.",
+    "no_fabricated_pass": "exportSave returns null and importSave returns 0 when no live heap view / alloc is available; the glue never returns synthetic bytes or a fake success to satisfy a check.",
+    "frame_counter_not_wallclock": "_bridge_frame() counts render-loop passes (~84/s here), NOT the 30 Hz gameplay kernel tick. Never use it as a wall-clock gameplay-speed proxy; the only gameplay-speed lever is _bridge_set_speed / SPEED_RATE and it must be validated by world-delta over real time."
+  },
+  "additive_js_facade": {
+    "flushPersist": "() => Promise<boolean> \u2014 await real IDBFS flush completion (see save_semantics.durable_completion). Added in the heap-access fix; the frozen v1 surface is otherwise unchanged."
+  },
+  "v1_1_additive": {
+    "status": "ADDITIVE to the frozen v1; no frozen member changed.",
+    "kernel_frame_state": "state_fields.KERNEL_FRAME=24 -> the actual 30 Hz Kernel::getFrameNum() tick (contrast FRAME=19, the ~84/s render-loop pass counter).",
+    "event_payload": "Module.bridgeOnEngineEvent extended to (type,a,b,c,d,frame); existing (type,a,b,c) consumers unaffected.",
+    "event_types": "SAVE_RESULT=7, LOAD_RESULT=8 (combat types 1-6 unchanged).",
+    "wasm_md5_combat_build": "d2a01f7a26c3e4e96abf783c9952d0df",
+    "full_patch": "T2-wasm-build-spike/patches/T2-combat-E2.patch",
+    "delta_file": "T2-wasm-build-spike/contracts/bridge-v1.1-delta.json",
+    "canonical_note": ".scratch/contracts is read-only in the worker sandbox; the host must copy this worktree copy (and the delta) to the canonical path."
+  }
+}

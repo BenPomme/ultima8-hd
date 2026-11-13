@@ -1,0 +1,12 @@
+{
+  "asset": "A1",
+  "model": "x-ai/grok-imagine-image-2.0",
+  "provider": "xai",
+  "dimensions": [
+    1280,
+    720
+  ],
+  "prompt_sha256": "065650a60d16f2ee70234252638900020e8ef296424aadb081e068b022804216",
+  "sha256": "e1d00f5de9e47794eb674bf43d5fb18fca52d4cf64a2c5b481b0ab4baef764a1",
+  "use": "Modern launcher/loading only; new illustration, not original in-game sprites"
+}

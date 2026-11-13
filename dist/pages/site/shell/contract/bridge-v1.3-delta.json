@@ -1,0 +1,83 @@
+{
+  "delta_of": "ultima8-engine-bridge v1 + v1.1 delta + v1.2 delta",
+  "applies_from": "CP15 E3 audio/run deliverable (Modern GM FluidLite / Classic FM / always-run / audio status)",
+  "kind": "additive",
+  "no_frozen_member_changed": true,
+  "frozen_members_unchanged": {
+    "state_indices_0_52": "unchanged (0..24 E1/v1.1, 25..38 E2b, 39..52 v1.2)",
+    "event_types_1_10": "unchanged (7/8 save/load, 9/10 E2d QA trace)",
+    "commands_1_8": "unchanged",
+    "gestures_1_8": "unchanged",
+    "options_1_5": "unchanged (1=MUSIC_VOLUME..5=SUBTITLES)"
+  },
+  "canonical_contract_path": ".scratch/contracts/",
+  "worktree_contract_copy": "T2-wasm-build-spike/contracts/bridge-v1.3-delta.json",
+  "host_action": "copy contracts/bridge-v1.3-delta.json to the canonical .scratch/contracts path (worker sandbox is EPERM there). Do NOT overwrite bridge-v1.json / v1.1 / v1.2.",
+  "changes": {
+    "state_fields": {
+      "added": {
+        "AUDIO_SYNTH": 53,
+        "AUDIO_FONT_LOADED": 54,
+        "AUDIO_MUSIC_VOL": 55,
+        "AUDIO_SFX_VOL": 56,
+        "AUDIO_LOAD_ERROR": 57,
+        "AUDIO_FALLBACK": 58,
+        "AUDIO_CONTEXT_STATE": 59,
+        "ALWAYS_RUN": 60
+      },
+      "meaning": {
+        "AUDIO_SYNTH": "The music driver ACTUALLY in use right now: 0 = none, 1 = Classic FM (engine built-in AdLib/Miles-FM soundtrack, original tracks <128, +128 FM variants), 2 = Modern GM (FluidLite/FluidSynth behind the Miles GM driver). Read from the live MidiPlayer (AudioMixer::getMidiPlayer()) -- the driver created at Midi-open, not the requested conf value.",
+        "AUDIO_FONT_LOADED": "1 iff a general-MIDI driver actually finished loading a usable SoundFont (real fluid_synth_sfload() result != -1, via MidiDriver_FluidSynth::isSoundFontLoaded() / MidiDriver_MT32GM::isSoundFontLoaded()). 0 when FM/None is active or the font failed to load. This is a LOADED-font signal, not a 'downloaded file' signal.",
+        "AUDIO_MUSIC_VOL": "The engine's live music_volume mixer value (0..255), read from ConfMan after syncSoundSettings; the same value the mixer applies. Read-only.",
+        "AUDIO_SFX_VOL": "The engine's live sfx_volume mixer value (0..255). Read-only.",
+        "AUDIO_LOAD_ERROR": "Non-zero iff Modern GM was requested (audio_synth==1) but it is NOT active-and-loaded. Currently 1 = GM requested but no usable font loaded / not the active GM driver. 0 = requested source is satisfied (or Classic FM was requested).",
+        "AUDIO_FALLBACK": "1 iff Modern GM was requested but the ACTUAL driver is the original FM (i.e. the real fallback happened, e.g. font missing/failed). 0 otherwise. Use this to surface 'GM unavailable, using FM'.",
+        "AUDIO_CONTEXT_STATE": "State of the ACTUAL SDL3 AudioContext (Module['SDL3'].audioContext.state): 0 = suspended, 1 = running, 2 = closed, 3 = interrupted, -1 = unknown/none. The engine never forces autoplay; the shell must resume on the first real user gesture. Read live every frame.",
+        "ALWAYS_RUN": "The live always-run movement option (0/1), the same ConfMan key ('always_run') the U8 avatar mover reads to OR in the real MOVE_RUN movement flag. 1 means any movement uses the running animation/speed exactly as a held run key does."
+      },
+      "indices_unchanged": "0..52 keep their v1/v1.1/E2b/v1.2 meaning; all v1.3 fields are appended after SCREEN_HASH(52)."
+    },
+    "options": {
+      "added": {
+        "MUSIC_SYNTH": 6,
+        "ALWAYS_RUN": 7
+      },
+      "meaning": {
+        "MUSIC_SYNTH": "Music source switch (CMD_SET_OPTION, a=MUSIC_SYNTH, b=0|1). b=0 => Classic FM (sets music_driver=adlib); b=1 => Modern GM (sets music_driver=auto, gm_device=fluidsynth). Persists to scummvm.ini. NOT applied live: see 'live_switch' below.",
+        "ALWAYS_RUN": "b=0 off / b=1 on. Persists ConfMan 'always_run'. Applied LIVE by the mover on the next movement frame (real MOVE_RUN behaviour); no restart needed."
+      },
+      "reused_not_duplicated": {
+        "MUSIC_VOLUME": 1,
+        "SFX_VOLUME": 2,
+        "note": "E3 did NOT add a second volume API. bridge_queue_command(CMD_SET_OPTION,1,v)/(2,v) already sets ConfMan music_volume/sfx_volume and calls Ultima8Engine::syncSoundSettings(); AUDIO_MUSIC_VOL/AUDIO_SFX_VOL read the result back. UI Music/SFX sliders should use OPTION.MUSIC_VOLUME/SFX_VOLUME."
+      }
+    },
+    "exports": {
+      "added": {
+        "bridge_audio_set_soundfont": "int bridge_audio_set_soundfont(int ptr, int size) -- stages lazy-fetched General MIDI SoundFont bytes (already copied into the wasm heap with bridge_alloc) into the engine filesystem and points the real ConfMan 'soundfont' key at it, also setting gm_device=fluidsynth / audio_synth=1. Returns 1 on success, 0 on failure. NEVER embeds a font in the wasm."
+      },
+      "bridge_audio_set_soundfont": "int bridge_audio_set_soundfont(int ptr, int size) -- stages lazy-fetched General MIDI SoundFont bytes (already copied into the wasm heap with bridge_alloc). Writes them with the engine's own Common::DumpFile to $HOME/u8gm.sf2 (the Emscripten IDBFS mount, so it survives an explicit restart; NOT the volatile MEMFS root) and points the real ConfMan 'soundfont' key at that absolute path, also setting gm_device=fluidsynth / audio_synth=1. Returns 1 on success, 0 on failure. NEVER embeds a font in the wasm. Uses no bespoke FS lookup (no shadowed FS / no Module.FS dependency)."
+    },
+    "js_glue": {
+      "state_names": "STATE.AUDIO_SYNTH(53) .. STATE.ALWAYS_RUN(60) mirror the C++ names (Ultima8Bridge.STATE).",
+      "options": "Ultima8Bridge.OPTION.MUSIC_SYNTH(6), Ultima8Bridge.OPTION.ALWAYS_RUN(7).",
+      "helpers": {
+        "setSoundFont(bytes)": "Uint8Array -> allocates in wasm heap, calls bridge_audio_set_soundfont; returns 1/0.",
+        "audio()": "returns {synth, fontLoaded, musicVolume, sfxVolume, loadError, fallback, contextState, alwaysRun} read from the STATE indices above."
+      }
+    },
+    "live_switch": {
+      "music_synth": "REQUIRES RESTART. The U8 music process (U8MusicProcess) binds the MidiPlayer instance that AudioMixer::openMidiOutput() creates during startupGame(); AudioMixer::closeMidiOutput()+openMidiOutput() would leave the process pointing at a freed driver. Therefore switching Modern GM <-> Classic FM sets the conf and takes effect on the NEXT engine/game start (page reload or re-entering the game). The bridge reports the achieved driver via AUDIO_SYNTH so the shell can show 'applies after restart'.",
+      "always_run": "LIVE, no restart (read by the mover every frame).",
+      "volume": "LIVE (syncSoundSettings)."
+    },
+    "defaults": {
+      "audio_synth": "1 (Modern GM) is the registered default. When no SoundFont has been staged (bridge_audio_set_soundfont never succeeded) the engine has no gm_device/fluidsynth font, so detectDevice() falls back to Classic FM; AUDIO_SYNTH==1 and AUDIO_FALLBACK==1 report that honestly. After the shell stages a font and restarts once, AUDIO_SYNTH==2, AUDIO_FONT_LOADED==1, AUDIO_FALLBACK==0.",
+      "always_run": "false"
+    },
+    "shell_ui_hook": {
+      "path": "engine-patches/E3-shell-ui-hook.md",
+      "note": "Model-authored minimal UI hook (OPTION/STATE names, unhide Music/SFX sliders, push volumes+always-run, stageFont helper). NOT applied here; shell tree is separately owned."
+    }
+  }
+}

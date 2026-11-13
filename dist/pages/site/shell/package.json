@@ -1,0 +1,6 @@
+{
+  "name": "ultima8-shell-core",
+  "private": true,
+  "type": "module",
+  "description": "Headless, dependency-free control/settings core for the Ultima VIII browser shell."
+}

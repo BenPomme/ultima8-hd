@@ -1,0 +1,55 @@
+# Claude CP139 approved public release workflow.
+name: Publish reviewed Ultima browser build
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ultima-pages
+  cancel-in-progress: false
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Fetch HD packs from public release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download assets-v1 --repo "${{ github.repository }}" \
+            --pattern 'u8hd_2.pak' --pattern 'u8hd_4.pak' --pattern 'SHA256SUMS' \
+            --dir dist/pages/site/data/games/ultima8
+          cd dist/pages/site/data/games/ultima8
+          sha256sum -c SHA256SUMS
+          rm SHA256SUMS
+      - name: Check private-free release contents and site size
+        run: |
+          python3 tools/release/make_manifest.py --root dist/pages/site --out release-manifest
+          node --input-type=module - <<'JS'
+          import fs from 'node:fs';
+          const m=new WebAssembly.Module(fs.readFileSync('dist/pages/site/scummvm.wasm'));
+          const qa=WebAssembly.Module.exports(m).filter(e=>e.name.startsWith('bridge_fixture_'));
+          if(qa.length)throw Error('Private QA engine must never be published');
+          const manifest=JSON.parse(fs.readFileSync('release-manifest/asset-manifest.json'));
+          if(manifest.errors.length)throw Error('Manifest errors');
+          if(manifest.entries.reduce((n,e)=>n+e.size,0)>1000000000)throw Error('Pages site exceeds size limit');
+          for(const e of manifest.entries){
+            if(/(^|\/)(\.env[^/]*|\.dev.vars[^/]*|\.git|\.scratch|emsdk[^/]*|QA-CONTROL-DO-NOT-SHIP.json)(\/|$)/i.test(e.path))throw Error('Private file in site: '+e.path);
+          }
+          JS
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist/pages/site
+  publish:
+    needs: assemble
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the reviewed artifact
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

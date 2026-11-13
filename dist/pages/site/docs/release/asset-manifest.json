@@ -1,0 +1,1617 @@
+{
+  "sources": [
+    ".=dist/pages/site"
+  ],
+  "asset_count": 268,
+  "errors": [],
+  "entries": [
+    {
+      "path": ".nojekyll",
+      "category": "other",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "NOTICE.md",
+      "category": "other",
+      "size": 2911,
+      "sha256": "92440061b7eacc9091692042e312bae01a960067607f9e08ce3149baa263fd1a"
+    },
+    {
+      "path": "PLAYER-README.md",
+      "category": "other",
+      "size": 1645,
+      "sha256": "a3f694f62cc139eb937812dde0499329168ec1e47dc37536794818ca70ce5675"
+    },
+    {
+      "path": "favicon.ico",
+      "category": "engine",
+      "size": 43080,
+      "sha256": "599765296dea94c166f49363d1bcfc793fdccaff7d699ba2859515b70ffacca5"
+    },
+    {
+      "path": "index.html",
+      "category": "other",
+      "size": 171,
+      "sha256": "1ac5c9255565b2dd3b80522a7e463fdda1872b38c3f5f08e750fe5f7c4dd16dc"
+    },
+    {
+      "path": "logo.svg",
+      "category": "engine",
+      "size": 100653,
+      "sha256": "b439ac460aea1872aad65bf92a54fea443714849d72d1d2e4e33cff7fd417d60"
+    },
+    {
+      "path": "manifest.json",
+      "category": "engine",
+      "size": 775,
+      "sha256": "41e8358c34024587c3a00ef7fed7f1d4c44ee329b407ff7a7c8832ba54f76ebe"
+    },
+    {
+      "path": "scummvm-192.png",
+      "category": "engine",
+      "size": 8916,
+      "sha256": "a9db11cb45dab480893b67eca35ff7c4350053e6def692618b4f2bdfe988bcb6"
+    },
+    {
+      "path": "scummvm-512.png",
+      "category": "engine",
+      "size": 22721,
+      "sha256": "43cb7ff55fdf3b5cdf5e230410126328c0c703ff9ad63a34f4cd0e5e3e7573a6"
+    },
+    {
+      "path": "scummvm.html",
+      "category": "engine",
+      "size": 4044,
+      "sha256": "367c1f1b90f66fa30fc05312e767ad17300a2bf90d357f292131f99a90f673b9"
+    },
+    {
+      "path": "scummvm.html.symbols",
+      "category": "other",
+      "size": 640256,
+      "sha256": "cd5fa3ec10a1eb7654fb78399b4adeb22d0c3696314caa87ce65e2106bcc2909"
+    },
+    {
+      "path": "scummvm.ini",
+      "category": "engine",
+      "size": 452,
+      "sha256": "0c01816020626a35b3b80d46a0cf69282fc1075ff473244d0fdf3bbff1067d7e"
+    },
+    {
+      "path": "scummvm.js",
+      "category": "engine",
+      "size": 235398,
+      "sha256": "a0dd01a2d4dd9e2be0894034dea1e95cc5e24231fae176d0ddff204004e598b9"
+    },
+    {
+      "path": "scummvm.wasm",
+      "category": "engine",
+      "size": 12196358,
+      "sha256": "63d85168ecd7b5e9372e44494765c72dc08f1097de60e13234d649c5254adafb"
+    },
+    {
+      "path": "ultima8-bridge.js",
+      "category": "engine",
+      "size": 31746,
+      "sha256": "fc58cde8a0f8403604f0521815ab04d6947dc32dee7b787202c984335b63ddbc"
+    },
+    {
+      "path": "shell/index.html",
+      "category": "shell",
+      "size": 1271,
+      "sha256": "b613e81ecef29baaf4a2ef9e247606a0bade3f17de5408c5e0c5e82af6d64d41"
+    },
+    {
+      "path": "shell/package.json",
+      "category": "shell",
+      "size": 177,
+      "sha256": "52fbdfd5f847a8472c36adf9518ea6e1b9f62a07913ca8d4da6f2b4d41c703bf"
+    },
+    {
+      "path": "shell/ui/MAPPING.md",
+      "category": "shell",
+      "size": 3376,
+      "sha256": "93b520bdde7d295b9bb0780e6a40d5feb9773c9698b556f695d44d60687e21e5"
+    },
+    {
+      "path": "shell/ui/app.js",
+      "category": "shell",
+      "size": 56527,
+      "sha256": "8ee92fe51c0701133cccc4e1e3a4696251cb918db1468c4cbbdb1771dd16b3ec"
+    },
+    {
+      "path": "shell/ui/bridge.js",
+      "category": "shell",
+      "size": 53798,
+      "sha256": "065071feff4ec00d3187315dbc7a3c9bbc212ca62124ebaccea768a68af35a58"
+    },
+    {
+      "path": "shell/ui/config.js",
+      "category": "shell",
+      "size": 5933,
+      "sha256": "cebf785dad066f04eeddb40f32315a1ef78f332bc8c42c3bb1e13834813bf01c"
+    },
+    {
+      "path": "shell/ui/contract.js",
+      "category": "shell",
+      "size": 6580,
+      "sha256": "6db17cdd408ffe3d750fe8d201901318765b446172dd715feaa8a9a2c9779d0c"
+    },
+    {
+      "path": "shell/ui/dom.js",
+      "category": "shell",
+      "size": 1205,
+      "sha256": "b1fdf89d9ebabd972e0ecb20452bf49709538c6308c8e83fbcd7283f3da6e547"
+    },
+    {
+      "path": "shell/ui/music.js",
+      "category": "shell",
+      "size": 14422,
+      "sha256": "aca73da20238e330d98a03cbafe1852d71f7047f834e1545d50d7f744e4d828f"
+    },
+    {
+      "path": "shell/ui/persist.js",
+      "category": "shell",
+      "size": 1423,
+      "sha256": "5e12cd7e5e697f6f0f3a87cb9ce3ec42747a6edd869a587498d6b98eafc0ad9b"
+    },
+    {
+      "path": "shell/ui/reboot.js",
+      "category": "shell",
+      "size": 3326,
+      "sha256": "c24c9c341559447c5975aa7a69f8d5ccec7ff8824e33468cea9be428ede40bda"
+    },
+    {
+      "path": "shell/ui/saves.js",
+      "category": "shell",
+      "size": 2876,
+      "sha256": "48b6205b73d7f38334dba13a931a1149cbfcc7f6240d5ea7d7c84a55cb827ac2"
+    },
+    {
+      "path": "shell/ui/screens.js",
+      "category": "shell",
+      "size": 17089,
+      "sha256": "7c30f18444d29d857290020d19683ac7f2fcaf20bdde61b1cde944ebee2d267f"
+    },
+    {
+      "path": "shell/ui/state.js",
+      "category": "shell",
+      "size": 5232,
+      "sha256": "aa8c0adbbaeaf700258cb9647401e7e4c5c2a5cb43f9d6a148429f7ada74741d"
+    },
+    {
+      "path": "shell/ui/theme.css",
+      "category": "shell",
+      "size": 14065,
+      "sha256": "a4932e426c883dec4212fcaf87efd63cea61e190f766577a01a4a2113fc7ad33"
+    },
+    {
+      "path": "shell/ui/touch.js",
+      "category": "shell",
+      "size": 6716,
+      "sha256": "9ffae840ee1a86329ae1d44c422c2702223831c2376fde04fdcfb0ea099fcbb8"
+    },
+    {
+      "path": "shell/ui/feedback/effects.js",
+      "category": "shell",
+      "size": 3493,
+      "sha256": "9a99572b35118363b35d72ddfa01618151a5501e8f65c08f26c9c3cd2d7234e8"
+    },
+    {
+      "path": "shell/ui/feedback/events.js",
+      "category": "shell",
+      "size": 5063,
+      "sha256": "63974514a7876e2e9fa95a90f6253d55d628326412332e53b596c97f09def7ef"
+    },
+    {
+      "path": "shell/ui/feedback/haptics.js",
+      "category": "shell",
+      "size": 988,
+      "sha256": "7e219b5dff44bf5d67b0ed3421080278898e9d5bb1753f1909c3ae099fdf052c"
+    },
+    {
+      "path": "shell/ui/feedback/index.js",
+      "category": "shell",
+      "size": 2315,
+      "sha256": "ffd3a90cd941255bb93b32ce102196d167420f2e7701d8e680fbf9b5e3821ff9"
+    },
+    {
+      "path": "shell/contract/README.md",
+      "category": "shell",
+      "size": 2340,
+      "sha256": "494e3c5cafe7cb9b7f2a8dec4e1c1c709b050eeaad2d43f7ce072a8162e9decd"
+    },
+    {
+      "path": "shell/contract/bridge-v1.1-delta.json",
+      "category": "shell",
+      "size": 5194,
+      "sha256": "0784494e3c34dfcf5f11ca144d56c59cca745aa32f97b857b7fc1c71ceba4f9a"
+    },
+    {
+      "path": "shell/contract/bridge-v1.2-delta.json",
+      "category": "shell",
+      "size": 12557,
+      "sha256": "ed05728be13b3a01d651c2c37432d87ceaa9a1935de76116b42ee8af40f9dc04"
+    },
+    {
+      "path": "shell/contract/bridge-v1.3-delta.json",
+      "category": "shell",
+      "size": 7305,
+      "sha256": "0d927cd7d13532347364d6b07019f19e663895574c913cfcbbead2a75615fdcb"
+    },
+    {
+      "path": "shell/contract/bridge-v1.json",
+      "category": "shell",
+      "size": 14826,
+      "sha256": "64c0bb73bc5fa1bef8aa60ed55a1d4720dff0760cf19e34347c6c473cb1750a4"
+    },
+    {
+      "path": "shell/core/actions.js",
+      "category": "shell",
+      "size": 2970,
+      "sha256": "f7b5f0886d94b3d2e71638b1ecc3458db7336e0d43a670fb2e9f04be252611e4"
+    },
+    {
+      "path": "shell/core/enginebridge.js",
+      "category": "shell",
+      "size": 4377,
+      "sha256": "3f9c9906c014bde14effb455d1295433be403bb96ca53b2e07892b3c63f6fabb"
+    },
+    {
+      "path": "shell/core/inputmap.js",
+      "category": "shell",
+      "size": 7290,
+      "sha256": "bd2e96cbf9d4650966ca100017f6997728aa997e897aa6a0ad23d4b4d9d0857b"
+    },
+    {
+      "path": "shell/core/settings.js",
+      "category": "shell",
+      "size": 8846,
+      "sha256": "38339e4249486760054ed5d2c4f84536b07570cffb8eba8947cd3c727f9dd93b"
+    },
+    {
+      "path": "shell/core/input/clickmove.js",
+      "category": "shell",
+      "size": 18121,
+      "sha256": "2416e2ad9d05d3d834a47d1be753334b2a43d0e678cd6c939b9b7d147b962a74"
+    },
+    {
+      "path": "shell/bridge/action-map.draft.js",
+      "category": "shell",
+      "size": 12835,
+      "sha256": "672098826ca40491c74c2ddb8aa1618eb65c3ddfe03d8524d2630cc43e7ac605"
+    },
+    {
+      "path": "shell/bridge/engine-events.draft.js",
+      "category": "shell",
+      "size": 9651,
+      "sha256": "f2118a1b22dd200ae49dc9a45e869d440ca095efef518174c7bca03e73be4b20"
+    },
+    {
+      "path": "shell/visual/L1c-integration.patch",
+      "category": "shell",
+      "size": 3035,
+      "sha256": "0b033491cc61aa51f4fe8c611e86ef73b14bc02fc49ed45da568763b4ddfded1"
+    },
+    {
+      "path": "shell/visual/clickmarker.js",
+      "category": "shell",
+      "size": 7135,
+      "sha256": "b588497be455e212609bde9c52b2542643cd99d52fc69368f279a15d8ea899b6"
+    },
+    {
+      "path": "shell/visual/framefilter.js",
+      "category": "shell",
+      "size": 26207,
+      "sha256": "ec676d889008dc24e7774e5663a282fab4f9d37a33658a32c691be99a4f64060"
+    },
+    {
+      "path": "shell/visual/scale2x.js",
+      "category": "shell",
+      "size": 4924,
+      "sha256": "44cf4d814b5d1c77e8b99cb3b4b741306e5e93b9cb8652b0a8d83095128f0c74"
+    },
+    {
+      "path": "shell/npc/api.js",
+      "category": "shell",
+      "size": 3546,
+      "sha256": "353b145f4e21e5fe74afa200208a2b19e2e94591c95c886bc84ada658993b2e5"
+    },
+    {
+      "path": "shell/npc/avatar.js",
+      "category": "shell",
+      "size": 3286,
+      "sha256": "7585d6deb1d98d2dfde2c21556c9ab8c9ef6a26c9c7fcedc018c9b6554abc457"
+    },
+    {
+      "path": "shell/npc/bridge-adapter.js",
+      "category": "shell",
+      "size": 6547,
+      "sha256": "488aaf01bca5f2783401e10f5d09d27e574d4d5a9459289c5d26844ca71e742d"
+    },
+    {
+      "path": "shell/npc/chat.js",
+      "category": "shell",
+      "size": 9193,
+      "sha256": "405a1422d8ce3e878804af79369e2e46eae3ad290ea772cd11ddcc4ae0596b16"
+    },
+    {
+      "path": "shell/npc/config.js",
+      "category": "shell",
+      "size": 833,
+      "sha256": "052b56c1d7c5bc6e1a07a3e3c99b413cf62919da1a96c4c718f4b3ab7648a2bd"
+    },
+    {
+      "path": "shell/npc/include.html",
+      "category": "shell",
+      "size": 763,
+      "sha256": "0e741828ecaaa6ecac281466b9b0a5a9dd29c4293ca0b8bf699e7598e95be8dc"
+    },
+    {
+      "path": "shell/npc/index.js",
+      "category": "shell",
+      "size": 4323,
+      "sha256": "90ea7df019ac0cca8ce83de27f8537457ba5e2fe7a4c33b268ae148ce0a23118"
+    },
+    {
+      "path": "shell/npc/memory.js",
+      "category": "shell",
+      "size": 13239,
+      "sha256": "6420ee93fe6407541788a8945a938e96405ef7fc1c85dfaad9bf990c87780f50"
+    },
+    {
+      "path": "shell/npc/panel.css",
+      "category": "shell",
+      "size": 1719,
+      "sha256": "7aa0af24fce120497f1a2847a5878a5861eff4326ee6c1d5552c488321397893"
+    },
+    {
+      "path": "shell/npc/panel.js",
+      "category": "shell",
+      "size": 4836,
+      "sha256": "ef60c78bac0769f5c187b3dd77f035fb8ee089f5fb380961e46800dee28a9151"
+    },
+    {
+      "path": "shell/npc/prompt.js",
+      "category": "shell",
+      "size": 8388,
+      "sha256": "ab82248afaaca41e0f03f322dd02876cecb37b7ac439959b7b10ceff03b0e8d9"
+    },
+    {
+      "path": "shell/npc/tts.js",
+      "category": "shell",
+      "size": 3276,
+      "sha256": "1642a57e855bebfe52c6f57f221298c6c7410c14352572a98fe4c3235cf942df"
+    },
+    {
+      "path": "shell/npc/cards/index.js",
+      "category": "shell",
+      "size": 7820,
+      "sha256": "60a9b93a90b870bf2c72d9b145cd43f9076590a2f1a903610f3f7e5e71cfcbf2"
+    },
+    {
+      "path": "web/assets/modern/art/credits.json",
+      "category": "modern-art",
+      "size": 380,
+      "sha256": "7a4f9e4ecb7a4e7e88ef04075230c35d01e62511b0613d4c17049b6ee369c072"
+    },
+    {
+      "path": "web/assets/modern/art/keyart_pagan_shore_16x9.webp",
+      "category": "modern-art",
+      "size": 179016,
+      "sha256": "e1d00f5de9e47794eb674bf43d5fb18fca52d4cf64a2c5b481b0ab4baef764a1"
+    },
+    {
+      "path": "docs/hd-profile-configuration.txt",
+      "category": "packaging",
+      "size": 894,
+      "sha256": "08868e5076eef63c0bbe3271101592bee3a7de8e6261a26eb431775b0bb52a27"
+    },
+    {
+      "path": "docs/release/licence/A1-art.md",
+      "category": "packaging",
+      "size": 762,
+      "sha256": "99e61bd265b13dff9e9542f0929ee485fa982a573289c49c15fc8a3f870c7d5b"
+    },
+    {
+      "path": "docs/release/licence/FluidLite-LICENSE",
+      "category": "packaging",
+      "size": 736,
+      "sha256": "a5564e99fd7f49e1344152a8c5bc1d420d5f973b30e010946764db0b5b9e668c"
+    },
+    {
+      "path": "docs/release/licence/FluidLite-LICENSE.txt",
+      "category": "packaging",
+      "size": 736,
+      "sha256": "a5564e99fd7f49e1344152a8c5bc1d420d5f973b30e010946764db0b5b9e668c"
+    },
+    {
+      "path": "docs/release/licence/GPL-2.0.txt",
+      "category": "packaging",
+      "size": 17984,
+      "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6"
+    },
+    {
+      "path": "docs/release/licence/GeneralUser-GS-LICENSE.txt",
+      "category": "packaging",
+      "size": 2317,
+      "sha256": "7b32efefdf95ce38a043799f0659853ddc00fbaa14d8c50f0aca16b9b8b405be"
+    },
+    {
+      "path": "docs/release/licence/INDEX.md",
+      "category": "packaging",
+      "size": 1782,
+      "sha256": "8c920bb749cbf98592d1719d4b5b43a7213377ea2660457fb535d2b644056487"
+    },
+    {
+      "path": "docs/release/licence/LGPL-2.1-PROVENANCE.md",
+      "category": "packaging",
+      "size": 719,
+      "sha256": "725f856a53c0cf360425f1688d5a7b2337d93282dcaf9fb461d505d83fe4930c"
+    },
+    {
+      "path": "docs/release/licence/LGPL-2.1.txt",
+      "category": "packaging",
+      "size": 26001,
+      "sha256": "5749785c8bdefafcb5d798270ed0a967036fe2ca63dcedade1627565dfef81d2"
+    },
+    {
+      "path": "docs/release/licence/NOTICE.md",
+      "category": "packaging",
+      "size": 2911,
+      "sha256": "92440061b7eacc9091692042e312bae01a960067607f9e08ce3149baa263fd1a"
+    },
+    {
+      "path": "docs/release/licence/copyright",
+      "category": "packaging",
+      "size": 2307,
+      "sha256": "6ef01652619cf29b289a9403cd2ab59550fa3e2c30844c67292eea5421f993e9"
+    },
+    {
+      "path": "docs/release/licence/generaluser-license.txt",
+      "category": "packaging",
+      "size": 2317,
+      "sha256": "7b32efefdf95ce38a043799f0659853ddc00fbaa14d8c50f0aca16b9b8b405be"
+    },
+    {
+      "path": "docs/release/licence/scummvm-source-offer.md",
+      "category": "packaging",
+      "size": 5531,
+      "sha256": "60aa18a5bd4a73a9e939e2d1b94047a55337061e9060700468bce534dd56c776"
+    },
+    {
+      "path": "docs/release/licence/soundfonts.md",
+      "category": "packaging",
+      "size": 3311,
+      "sha256": "e269d476487917f930fbdc219cb959074554998fd3fbf2612b1cae9626ecbcdd"
+    },
+    {
+      "path": "docs/release/licence/timgm6mb-copyright.txt",
+      "category": "packaging",
+      "size": 2307,
+      "sha256": "6ef01652619cf29b289a9403cd2ab59550fa3e2c30844c67292eea5421f993e9"
+    },
+    {
+      "path": "doc/AUTHORS",
+      "category": "engine-license-docs",
+      "size": 43252,
+      "sha256": "a27b31bc7e8f0f4d123a0cb8eb8231faa6e4ca23f630e79ab2990b43d60a7870"
+    },
+    {
+      "path": "doc/CONTRIBUTING.md",
+      "category": "engine-license-docs",
+      "size": 599,
+      "sha256": "480b096709f61525251cf847741a889d0027a7f8a46d26a24d7a423948d3e299"
+    },
+    {
+      "path": "doc/COPYING",
+      "category": "engine-license-docs",
+      "size": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "doc/COPYING.Apache",
+      "category": "engine-license-docs",
+      "size": 11488,
+      "sha256": "314ca6233f2849131fc87c24cdf112aa204605051d8f17fbf5982945e34dbb67"
+    },
+    {
+      "path": "doc/COPYING.BSD",
+      "category": "engine-license-docs",
+      "size": 8058,
+      "sha256": "80bec7489af9bdd2e0f5467f6267f8985aaaca50e5061c9d02467e103c126628"
+    },
+    {
+      "path": "doc/COPYING.BSL",
+      "category": "engine-license-docs",
+      "size": 1429,
+      "sha256": "58afb430442855628fa2509cddd905ad61c12fe564731466f56554edd5344ae5"
+    },
+    {
+      "path": "doc/COPYING.GLAD",
+      "category": "engine-license-docs",
+      "size": 3122,
+      "sha256": "d74397819a7776231c638e73b9197a45faad8347278bdfec30a041d1cb808313"
+    },
+    {
+      "path": "doc/COPYING.ISC",
+      "category": "engine-license-docs",
+      "size": 967,
+      "sha256": "4bdb0a32d3ba3070ed77dc48efb5348ce647bac3a1716992fa4cc080b99a3af7"
+    },
+    {
+      "path": "doc/COPYING.LGPL",
+      "category": "engine-license-docs",
+      "size": 26721,
+      "sha256": "f2c0f033c76185c3c981ad458ea433ca2787ab9b6f4623cab500fc8024db0e05"
+    },
+    {
+      "path": "doc/COPYING.LUA",
+      "category": "engine-license-docs",
+      "size": 2035,
+      "sha256": "8e0272ae02203977f9d0312bd82fe2498f37741b51c52731b9af0d66dbde7b6a"
+    },
+    {
+      "path": "doc/COPYING.MIT",
+      "category": "engine-license-docs",
+      "size": 2695,
+      "sha256": "acc32538625eb6a7b2bdd43749a787efe9544400e10e5c01fb6dd91a1a60b94b"
+    },
+    {
+      "path": "doc/COPYING.MKV",
+      "category": "engine-license-docs",
+      "size": 1600,
+      "sha256": "cfac47baf5d584bc5458c90b33116087dd1bda638adf751f123e7d176e4ac67f"
+    },
+    {
+      "path": "doc/COPYING.MPL",
+      "category": "engine-license-docs",
+      "size": 16842,
+      "sha256": "c92198047ac07252eada8d895a9cbe9473504d54b28e7646b5fb053f876b9fc2"
+    },
+    {
+      "path": "doc/COPYING.OFL",
+      "category": "engine-license-docs",
+      "size": 5067,
+      "sha256": "a79c445b3f3061588468e44bc9fff8b8ebac169374fabb482ea7274a478b45b5"
+    },
+    {
+      "path": "doc/COPYING.TINYGL",
+      "category": "engine-license-docs",
+      "size": 1324,
+      "sha256": "f62a84ca5a9a1a6f36d63336c461b6d21902fdfa84a50969b0d9ec6c6f0b90d3"
+    },
+    {
+      "path": "doc/COPYRIGHT",
+      "category": "engine-license-docs",
+      "size": 15302,
+      "sha256": "95c3a8ed18246d6a7135d7ba0aacd4df9a0957f7e1de8f58ec8e011d84557a6b"
+    },
+    {
+      "path": "doc/COPYRIGHT.Roland_SC-55",
+      "category": "engine-license-docs",
+      "size": 142,
+      "sha256": "74c6b1006252cb09aa87dd7d05180a5963a5eec35174ead39981ed68073dda2a"
+    },
+    {
+      "path": "doc/CatharonLicense.txt",
+      "category": "engine-license-docs",
+      "size": 5359,
+      "sha256": "372251a3ce2ecdb74e076dede2c7d0d1e16a5003c548177e9908627192dd064c"
+    },
+    {
+      "path": "doc/NEWS.md",
+      "category": "engine-license-docs",
+      "size": 194837,
+      "sha256": "37257bb11beeae01acc7d813b50be50e18f06041d4d46afafa6936c618a0c097"
+    },
+    {
+      "path": "doc/README.md",
+      "category": "engine-license-docs",
+      "size": 4879,
+      "sha256": "94b871636b05ea0b4b7e77b2ef8d090d191df795b13459166f83e33247914a14"
+    },
+    {
+      "path": "fonts/GeneralUser-GS.sf2",
+      "category": "soundfont",
+      "size": 32319396,
+      "sha256": "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe"
+    },
+    {
+      "path": "fonts/TimGM6mb.sf2",
+      "category": "soundfont",
+      "size": 5969788,
+      "sha256": "c5378b62028c920cb11e4803327983fee2f2cdff5dc89c708e39da417e51c854"
+    },
+    {
+      "path": "data/achievements.dat",
+      "category": "engine-data",
+      "size": 249239,
+      "sha256": "6f5394edee3a2ed9165d1ac0611a5e02aabe40e7ceca9e51926d01b23f157493"
+    },
+    {
+      "path": "data/classicmacfonts.dat",
+      "category": "engine-data",
+      "size": 626103,
+      "sha256": "d33aa56fbbe119a1567a843df9bb759cb6589f236926b93a78dc033b2f4221d1"
+    },
+    {
+      "path": "data/encoding.dat",
+      "category": "engine-data",
+      "size": 179670,
+      "sha256": "175689478e2acfe66a106e2df53c5707c49271183cfc7b5e65cd05c6b65c57f8"
+    },
+    {
+      "path": "data/gui-icons.dat",
+      "category": "engine-data",
+      "size": 3315855,
+      "sha256": "e772a8bb64ad3d7a807e859ad55c6b41269e66e32dfc78cdb4e583e183b5d828"
+    },
+    {
+      "path": "data/helpdialog.zip",
+      "category": "engine-data",
+      "size": 207764,
+      "sha256": "9ff3c7964a63b18ffa0e9cfcf60d4d8b4a77d7a583b2e66173716a825c777f81"
+    },
+    {
+      "path": "data/index.json",
+      "category": "engine-data",
+      "size": 393,
+      "sha256": "cba7e6a483168ad511287f46729107820631f9ed628ec18a534df6e154c0f390"
+    },
+    {
+      "path": "data/macgui.dat",
+      "category": "engine-data",
+      "size": 65656,
+      "sha256": "5e55c29903809bf5297a28fee22e203b6dc6f56240900036b9bd8036c0a67660"
+    },
+    {
+      "path": "data/residualvm.zip",
+      "category": "engine-data",
+      "size": 94592,
+      "sha256": "8606d1a227587b4bdd434adf5db0044c57c17c34041707b263e1f393da2d9f71"
+    },
+    {
+      "path": "data/scummclassic.zip",
+      "category": "engine-data",
+      "size": 16530,
+      "sha256": "fbe7249e7570cba7232d7da53026c8f72e292ca50babec6f39de31957c0b483b"
+    },
+    {
+      "path": "data/scummmodern.zip",
+      "category": "engine-data",
+      "size": 68115,
+      "sha256": "0100b9e1dafab5bbb70b360d9ba9c3dc99c054bcaf8f394f24c0d03b3fa02a20"
+    },
+    {
+      "path": "data/scummremastered.zip",
+      "category": "engine-data",
+      "size": 93938,
+      "sha256": "b7bd541600ac44790afcc7b698240179ccca1b45f5cbef206d93f0a64018f2e9"
+    },
+    {
+      "path": "data/shaders.dat",
+      "category": "engine-data",
+      "size": 641827,
+      "sha256": "c263f7279b5d14632f721df7079e9a6ec5e098e03886290a04745bf7bd70190a"
+    },
+    {
+      "path": "data/translations.dat",
+      "category": "engine-data",
+      "size": 3722762,
+      "sha256": "e4c716eab6d53c864b5f15c58815d87c638fadd091fe31a2621904a92cf5d217"
+    },
+    {
+      "path": "data/ultima.dat",
+      "category": "engine-data",
+      "size": 15981464,
+      "sha256": "e52cb8c261d747ac4203a0d929bd5cb8f44e80e61a97ee2957b2508824f01358"
+    },
+    {
+      "path": "data/ultima8.dat",
+      "category": "engine-data",
+      "size": 238149,
+      "sha256": "eb00526c19ff1d878754f27632c29bfecdb9c906764fc4328d76bb708146f4fc"
+    },
+    {
+      "path": "data/gui-icons/index.json",
+      "category": "engine-data",
+      "size": 2,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "path": "data/games/index.json",
+      "category": "game-data",
+      "size": 51,
+      "sha256": "6f2b8e27c570133983d1d82442f7c7b5ab2e114c7f1f6415562ccda84264b11e"
+    },
+    {
+      "path": "data/games/ultima8-de/ailxmi.dll",
+      "category": "game-data",
+      "size": 13191,
+      "sha256": "7b9f1b8a50cc87be7940e79e809aa02e937b7b236ece4fc387655e940447a30b"
+    },
+    {
+      "path": "data/games/ultima8-de/index.json",
+      "category": "game-data",
+      "size": 111,
+      "sha256": "fde6cf20de6cb39accb7235e8637e824fcc1febb8230d91da9e57111a5c4e2f5"
+    },
+    {
+      "path": "data/games/ultima8-de/u8.exe",
+      "category": "game-data",
+      "size": 935440,
+      "sha256": "1b1f470832e699a1eb4521f485acba8f1e62b641492a61de5c8d2561b01f3f6f"
+    },
+    {
+      "path": "data/games/ultima8-de/u8.ini",
+      "category": "game-data",
+      "size": 80,
+      "sha256": "8926c546f20085326b92ac5e540e8441d47eb44d19506379ff68cbf054fd6f3b"
+    },
+    {
+      "path": "data/games/ultima8-de/usecode/eusecode.flx",
+      "category": "game-data",
+      "size": 1251108,
+      "sha256": "5eceb14286f06f6bb07c35d0c83c0670d500474cd9a7390ad533c0f0f93f4e38"
+    },
+    {
+      "path": "data/games/ultima8-de/usecode/gusecode.flx",
+      "category": "game-data",
+      "size": 1378604,
+      "sha256": "522cb25c045d6f1c1c8e643301c95ddeed26a1c2ec25bd331807687e5a0ec338"
+    },
+    {
+      "path": "data/games/ultima8-de/usecode/index.json",
+      "category": "game-data",
+      "size": 71,
+      "sha256": "c3c25d00bdc8abaaa8e51261f4f3864b5e238aa9fd5b4f0089d7578e33b6b54b"
+    },
+    {
+      "path": "data/games/ultima8-de/usecode/unkcoff.dat",
+      "category": "game-data",
+      "size": 1024,
+      "sha256": "8763cb68d4435ee4065b41dc32b7136e8fd1224359598f0ddcc5406e20f063a4"
+    },
+    {
+      "path": "data/games/ultima8-de/static/anim.dat",
+      "category": "game-data",
+      "size": 402184,
+      "sha256": "e3a9f4eaf3cb7e846aaee8856c83a73fe72274b4cb57f8a9ae38109bc6adaf5c"
+    },
+    {
+      "path": "data/games/ultima8-de/static/ecredits.dat",
+      "category": "game-data",
+      "size": 5592,
+      "sha256": "f20e3e62d359243a8560e562ac775ed34120bdb9f1bac250f3e649e6456864be"
+    },
+    {
+      "path": "data/games/ultima8-de/static/eintro.skf",
+      "category": "game-data",
+      "size": 1297731,
+      "sha256": "33ff48d4a9d311ef7f296e58e7f2e3649501acbf693c2762e405a90ff7687cc8"
+    },
+    {
+      "path": "data/games/ultima8-de/static/endgame.skf",
+      "category": "game-data",
+      "size": 767670,
+      "sha256": "58dcf21b0be05a249afd1ad9da3686bb134706bcb6e35e45cceb9a07b21702ed"
+    },
+    {
+      "path": "data/games/ultima8-de/static/fixed.dat",
+      "category": "game-data",
+      "size": 1403824,
+      "sha256": "2ef821057eab275042818f984ff83e0d5e7680b5c035fd88bb837ead13f22705"
+    },
+    {
+      "path": "data/games/ultima8-de/static/gcredits.dat",
+      "category": "game-data",
+      "size": 6328,
+      "sha256": "fe888c14197e5bc8044ed70ee75bc3a0cb16552866b4b749dfac0e13f68b6565"
+    },
+    {
+      "path": "data/games/ultima8-de/static/gintro.skf",
+      "category": "game-data",
+      "size": 1264343,
+      "sha256": "9d91b99f6e47183955a60159707b8d50970b5fdb4014421ac4bc86915e5717e5"
+    },
+    {
+      "path": "data/games/ultima8-de/static/glob.flx",
+      "category": "game-data",
+      "size": 296916,
+      "sha256": "5b627dad8863519fb9a1c1b45a8ee116b3b85d3642d5794a09fbd063b5370cfc"
+    },
+    {
+      "path": "data/games/ultima8-de/static/gumpage.dat",
+      "category": "game-data",
+      "size": 416,
+      "sha256": "4b3dc0ab938f068b697ca1b6733223b06ce908b0f6e96c87413df9e4ca952a5d"
+    },
+    {
+      "path": "data/games/ultima8-de/static/index.json",
+      "category": "game-data",
+      "size": 394,
+      "sha256": "95cf4e8c46878b299f56d206a3b38fa5b6a0e62754d60db85b24ffe3e14b0c78"
+    },
+    {
+      "path": "data/games/ultima8-de/static/quotes.dat",
+      "category": "game-data",
+      "size": 8084,
+      "sha256": "d5ed671e855ed93ed5ae08fb8ef092a9f63a6d1c967dc20289b4891d6391e80e"
+    },
+    {
+      "path": "data/games/ultima8-de/static/typeflag.dat",
+      "category": "game-data",
+      "size": 16384,
+      "sha256": "2b07f4a6acc5504d9d07c47d3686f74107cac7b594ccb18251e01249fadebc62"
+    },
+    {
+      "path": "data/games/ultima8-de/static/u8fonts.flx",
+      "category": "game-data",
+      "size": 233563,
+      "sha256": "a9cfaa1cb0948fb5495ff8c6a5330e2290ef3fc5e754c284e306d7a29fdbb513"
+    },
+    {
+      "path": "data/games/ultima8-de/static/u8gumps.flx",
+      "category": "game-data",
+      "size": 266615,
+      "sha256": "7698251200f483027c5cd3728ca62b812fe0b249f8ff1916c3779545fc9bd3f4"
+    },
+    {
+      "path": "data/games/ultima8-de/static/u8mouse.shp",
+      "category": "game-data",
+      "size": 6554,
+      "sha256": "58b8d7f441110a2a66b3614f5a3290621b7cd8a86d9bd608976fcb905d9255a9"
+    },
+    {
+      "path": "data/games/ultima8-de/static/u8pal.pal",
+      "category": "game-data",
+      "size": 772,
+      "sha256": "738e609f43a99427c3809d09d4fc56af61a6bfef01b78cc5d11022e9d90bc0b2"
+    },
+    {
+      "path": "data/games/ultima8-de/static/u8shapes.flx",
+      "category": "game-data",
+      "size": 15374715,
+      "sha256": "9f2a2dc9076c5d06d1a7023822466273ed6291ef0243a4283a5b5f551e36dbda"
+    },
+    {
+      "path": "data/games/ultima8-de/static/wpnovlay.dat",
+      "category": "game-data",
+      "size": 56320,
+      "sha256": "99dd7fa2ce57951f1247f8947b1d11c322b61a5c4acb0fe8d662670dfa289eee"
+    },
+    {
+      "path": "data/games/ultima8-de/static/xformpal.dat",
+      "category": "game-data",
+      "size": 2480,
+      "sha256": "cce331f61ef0b7bb8f3f3e4c5fd520fcd32edd3006e76b72b80c62ea76f5542c"
+    },
+    {
+      "path": "data/games/ultima8-de/savegame/index.json",
+      "category": "game-data",
+      "size": 22,
+      "sha256": "ae6d5979a06ae67fc1761aeedda1c0a2686db43b09fa8f97c6ed16dc1ea6bb95"
+    },
+    {
+      "path": "data/games/ultima8-de/savegame/u8save.000",
+      "category": "game-data",
+      "size": 390855,
+      "sha256": "59cbde4fc136aff5aeb8a9b09c287c8ddcde56a8eb198af97a9a58dcd0f3fbdb"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/a16mt32.dll",
+      "category": "game-data",
+      "size": 13191,
+      "sha256": "7b9f1b8a50cc87be7940e79e809aa02e937b7b236ece4fc387655e940447a30b"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/a16sbfm.dll",
+      "category": "game-data",
+      "size": 18568,
+      "sha256": "b8f98a1f8f16b3f27ff0c4d5eb1b616350bb5a35715127e26d1a8904a1e95bd5"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/e109.flx",
+      "category": "game-data",
+      "size": 197562,
+      "sha256": "2d51753ccd18820414f09e9e2757a597dd8bfa9ad58b5071a02cc19f8082b46d"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/e129.flx",
+      "category": "game-data",
+      "size": 248768,
+      "sha256": "31d8cb1d2d171ea091ca4567a375dde57b87940db97dcaeb705602da60ac7bb1"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/e289.flx",
+      "category": "game-data",
+      "size": 68649,
+      "sha256": "d45311971221897e4e5812fb7d2d07023a24763ace11dc8cdfb020a472f57b7c"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/e385.flx",
+      "category": "game-data",
+      "size": 935537,
+      "sha256": "412df7585f5d7c4f5b3890393f0b2d658d3ce4ff0ab6d11f3ff5d8e80462a8b9"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/e433.flx",
+      "category": "game-data",
+      "size": 414824,
+      "sha256": "ba1ccef983ca95766a906500ecfae6902287d45bc2788d9d193b91695adc307b"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/e44.flx",
+      "category": "game-data",
+      "size": 282980,
+      "sha256": "bb33f60e1f5e5eac961649ae63edc28df691fe58715912d7dab049dcf7d543ba"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/e597.flx",
+      "category": "game-data",
+      "size": 178597,
+      "sha256": "0cb23fb4c9dff9c9625efb4d8855757a7778ce6b7c7af5a909c2d4a65d61d96b"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/e666.flx",
+      "category": "game-data",
+      "size": 464180,
+      "sha256": "57ffacac40734d7437d2a43fb162406732137d9c10457049acb49790bae38dc9"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/e80.flx",
+      "category": "game-data",
+      "size": 840523,
+      "sha256": "9278d1ae297806949833f89ad4bd6f991420e2cd231e055726201ce12ccc5a41"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/g109.flx",
+      "category": "game-data",
+      "size": 284608,
+      "sha256": "6c836f718f097d821081165fb3df66ac29215fa3618f9a702659e8088c336c81"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/g129.flx",
+      "category": "game-data",
+      "size": 236122,
+      "sha256": "8f71cfe25b6545560fa70d5d3251323f31b14db7e94dc411ed3a46a835cb1ced"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/g289.flx",
+      "category": "game-data",
+      "size": 57610,
+      "sha256": "140478a79be56fdeec96065fcbd680988c10a00a719cf0a5341d5a33f0ea5e5e"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/g385.flx",
+      "category": "game-data",
+      "size": 1042970,
+      "sha256": "23a0b0ef703cd2928823344faf1f47105e9879c18a5edda63a5dbb940953ce03"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/g433.flx",
+      "category": "game-data",
+      "size": 550439,
+      "sha256": "e1e53638187a5f4d7860a9e5186ef864b80d0830e741aae49fcaf9199344fb97"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/g44.flx",
+      "category": "game-data",
+      "size": 387344,
+      "sha256": "0fcb48ffc781399eaf27a400b5ffb170b248a837f0fd4217fd6b8db0620a4099"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/g597.flx",
+      "category": "game-data",
+      "size": 189179,
+      "sha256": "c65cd17bab6341dc94decbe018f72b607e4d3a824a09ecf9c4cbefbb97b0ffa9"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/g666.flx",
+      "category": "game-data",
+      "size": 512945,
+      "sha256": "14216c8ce7bec71df5c1488fc1a48602c22280979129f7cac36a35681305c1b0"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/g80.flx",
+      "category": "game-data",
+      "size": 835678,
+      "sha256": "19e1a8d5e4a0a923dda1c2ea393c6cff3b9340237e079e73b0555f4a19029b50"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/index.json",
+      "category": "game-data",
+      "size": 443,
+      "sha256": "dea8bb9da3f40d2d6e62640b5a102e963b9feb5c2820500b2f032702c38d22e2"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/music.flx",
+      "category": "game-data",
+      "size": 1378135,
+      "sha256": "9d3308c6e3f4e712275d59615e23391aa49a809b6fd3b94b13303c0dfad64e65"
+    },
+    {
+      "path": "data/games/ultima8-de/sound/sound.flx",
+      "category": "game-data",
+      "size": 1229584,
+      "sha256": "5fc4468b503aea62e53421f4204a1cbfbfa9f262e1e471394770f1d39f78ccfe"
+    },
+    {
+      "path": "data/games/ultima8-fr/ailxmi.dll",
+      "category": "game-data",
+      "size": 13191,
+      "sha256": "7b9f1b8a50cc87be7940e79e809aa02e937b7b236ece4fc387655e940447a30b"
+    },
+    {
+      "path": "data/games/ultima8-fr/index.json",
+      "category": "game-data",
+      "size": 111,
+      "sha256": "fde6cf20de6cb39accb7235e8637e824fcc1febb8230d91da9e57111a5c4e2f5"
+    },
+    {
+      "path": "data/games/ultima8-fr/u8.exe",
+      "category": "game-data",
+      "size": 935440,
+      "sha256": "1b1f470832e699a1eb4521f485acba8f1e62b641492a61de5c8d2561b01f3f6f"
+    },
+    {
+      "path": "data/games/ultima8-fr/u8.ini",
+      "category": "game-data",
+      "size": 80,
+      "sha256": "8926c546f20085326b92ac5e540e8441d47eb44d19506379ff68cbf054fd6f3b"
+    },
+    {
+      "path": "data/games/ultima8-fr/usecode/eusecode.flx",
+      "category": "game-data",
+      "size": 1251108,
+      "sha256": "5eceb14286f06f6bb07c35d0c83c0670d500474cd9a7390ad533c0f0f93f4e38"
+    },
+    {
+      "path": "data/games/ultima8-fr/usecode/fusecode.flx",
+      "category": "game-data",
+      "size": 1300957,
+      "sha256": "58ad5ebdd61b9582905599064954772a69a5c4f8486e9a20c6d8e1c27311a749"
+    },
+    {
+      "path": "data/games/ultima8-fr/usecode/index.json",
+      "category": "game-data",
+      "size": 71,
+      "sha256": "8cc770a32b88d324d25a94d870dbf36362e9250c2cc2a019fea4fda17b69b5ea"
+    },
+    {
+      "path": "data/games/ultima8-fr/usecode/unkcoff.dat",
+      "category": "game-data",
+      "size": 1024,
+      "sha256": "8763cb68d4435ee4065b41dc32b7136e8fd1224359598f0ddcc5406e20f063a4"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/anim.dat",
+      "category": "game-data",
+      "size": 402184,
+      "sha256": "e3a9f4eaf3cb7e846aaee8856c83a73fe72274b4cb57f8a9ae38109bc6adaf5c"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/ecredits.dat",
+      "category": "game-data",
+      "size": 5592,
+      "sha256": "f20e3e62d359243a8560e562ac775ed34120bdb9f1bac250f3e649e6456864be"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/eintro.skf",
+      "category": "game-data",
+      "size": 1297731,
+      "sha256": "33ff48d4a9d311ef7f296e58e7f2e3649501acbf693c2762e405a90ff7687cc8"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/endgame.skf",
+      "category": "game-data",
+      "size": 767670,
+      "sha256": "58dcf21b0be05a249afd1ad9da3686bb134706bcb6e35e45cceb9a07b21702ed"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/fcredits.dat",
+      "category": "game-data",
+      "size": 5781,
+      "sha256": "a46e0a2d7d3cff26d57cddb67c52200db4687d89d7a7473a4801813be7af4919"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/fintro.skf",
+      "category": "game-data",
+      "size": 1275321,
+      "sha256": "cf9fc1c67d131872125101728bbceb7d530d8eedacace4bdb580973080ee18f0"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/fixed.dat",
+      "category": "game-data",
+      "size": 1403824,
+      "sha256": "2ef821057eab275042818f984ff83e0d5e7680b5c035fd88bb837ead13f22705"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/glob.flx",
+      "category": "game-data",
+      "size": 296916,
+      "sha256": "5b627dad8863519fb9a1c1b45a8ee116b3b85d3642d5794a09fbd063b5370cfc"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/gumpage.dat",
+      "category": "game-data",
+      "size": 416,
+      "sha256": "4b3dc0ab938f068b697ca1b6733223b06ce908b0f6e96c87413df9e4ca952a5d"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/index.json",
+      "category": "game-data",
+      "size": 394,
+      "sha256": "d0b8f1b58460b0efa2e3a1841b63aa3a44dfe215958c2cc7a46d9b5195003c57"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/quotes.dat",
+      "category": "game-data",
+      "size": 8084,
+      "sha256": "d5ed671e855ed93ed5ae08fb8ef092a9f63a6d1c967dc20289b4891d6391e80e"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/typeflag.dat",
+      "category": "game-data",
+      "size": 16384,
+      "sha256": "2b07f4a6acc5504d9d07c47d3686f74107cac7b594ccb18251e01249fadebc62"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/u8fonts.flx",
+      "category": "game-data",
+      "size": 233563,
+      "sha256": "a9cfaa1cb0948fb5495ff8c6a5330e2290ef3fc5e754c284e306d7a29fdbb513"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/u8gumps.flx",
+      "category": "game-data",
+      "size": 266615,
+      "sha256": "7698251200f483027c5cd3728ca62b812fe0b249f8ff1916c3779545fc9bd3f4"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/u8mouse.shp",
+      "category": "game-data",
+      "size": 6554,
+      "sha256": "58b8d7f441110a2a66b3614f5a3290621b7cd8a86d9bd608976fcb905d9255a9"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/u8pal.pal",
+      "category": "game-data",
+      "size": 772,
+      "sha256": "738e609f43a99427c3809d09d4fc56af61a6bfef01b78cc5d11022e9d90bc0b2"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/u8shapes.flx",
+      "category": "game-data",
+      "size": 15374715,
+      "sha256": "9f2a2dc9076c5d06d1a7023822466273ed6291ef0243a4283a5b5f551e36dbda"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/wpnovlay.dat",
+      "category": "game-data",
+      "size": 56320,
+      "sha256": "99dd7fa2ce57951f1247f8947b1d11c322b61a5c4acb0fe8d662670dfa289eee"
+    },
+    {
+      "path": "data/games/ultima8-fr/static/xformpal.dat",
+      "category": "game-data",
+      "size": 2480,
+      "sha256": "cce331f61ef0b7bb8f3f3e4c5fd520fcd32edd3006e76b72b80c62ea76f5542c"
+    },
+    {
+      "path": "data/games/ultima8-fr/savegame/index.json",
+      "category": "game-data",
+      "size": 22,
+      "sha256": "4545ed248beda3e5697db89977e54a975664fb972b3769aa033dabe52c8688ac"
+    },
+    {
+      "path": "data/games/ultima8-fr/savegame/u8save.000",
+      "category": "game-data",
+      "size": 404951,
+      "sha256": "d7ae76a1a84badf930e869668666f4f2aacf8d1c53ab1a3dfe24ff52eb98f1f0"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/a16mt32.dll",
+      "category": "game-data",
+      "size": 13191,
+      "sha256": "7b9f1b8a50cc87be7940e79e809aa02e937b7b236ece4fc387655e940447a30b"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/a16sbfm.dll",
+      "category": "game-data",
+      "size": 18568,
+      "sha256": "b8f98a1f8f16b3f27ff0c4d5eb1b616350bb5a35715127e26d1a8904a1e95bd5"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/e109.flx",
+      "category": "game-data",
+      "size": 197562,
+      "sha256": "2d51753ccd18820414f09e9e2757a597dd8bfa9ad58b5071a02cc19f8082b46d"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/e129.flx",
+      "category": "game-data",
+      "size": 248768,
+      "sha256": "31d8cb1d2d171ea091ca4567a375dde57b87940db97dcaeb705602da60ac7bb1"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/e289.flx",
+      "category": "game-data",
+      "size": 68649,
+      "sha256": "d45311971221897e4e5812fb7d2d07023a24763ace11dc8cdfb020a472f57b7c"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/e385.flx",
+      "category": "game-data",
+      "size": 935537,
+      "sha256": "412df7585f5d7c4f5b3890393f0b2d658d3ce4ff0ab6d11f3ff5d8e80462a8b9"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/e433.flx",
+      "category": "game-data",
+      "size": 414824,
+      "sha256": "ba1ccef983ca95766a906500ecfae6902287d45bc2788d9d193b91695adc307b"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/e44.flx",
+      "category": "game-data",
+      "size": 282980,
+      "sha256": "bb33f60e1f5e5eac961649ae63edc28df691fe58715912d7dab049dcf7d543ba"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/e597.flx",
+      "category": "game-data",
+      "size": 178597,
+      "sha256": "0cb23fb4c9dff9c9625efb4d8855757a7778ce6b7c7af5a909c2d4a65d61d96b"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/e666.flx",
+      "category": "game-data",
+      "size": 464180,
+      "sha256": "57ffacac40734d7437d2a43fb162406732137d9c10457049acb49790bae38dc9"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/e80.flx",
+      "category": "game-data",
+      "size": 840523,
+      "sha256": "9278d1ae297806949833f89ad4bd6f991420e2cd231e055726201ce12ccc5a41"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/f109.flx",
+      "category": "game-data",
+      "size": 230236,
+      "sha256": "abea1448bb3b3a0bae12af141864cddf21ddbdefce12efa4d46c51f0fce6ef43"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/f129.flx",
+      "category": "game-data",
+      "size": 184265,
+      "sha256": "782f4840d7a314592698337e2ec3ee0721f2a4a1220577fd72ee03568fe5033e"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/f289.flx",
+      "category": "game-data",
+      "size": 54995,
+      "sha256": "ed75fe2f484ec4b7cffcc44d1cf7d9f6b16ccf26e034534436d1e07d80f39930"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/f385.flx",
+      "category": "game-data",
+      "size": 849756,
+      "sha256": "a99386130aa388d16a5478b2ec39325cb3fed1739f48643814c406c00bce5564"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/f433.flx",
+      "category": "game-data",
+      "size": 578493,
+      "sha256": "30454d098c813bedc0e43c291c6e1434dcc76ceb86c7e2eaa04604bbb8a62856"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/f44.flx",
+      "category": "game-data",
+      "size": 301849,
+      "sha256": "89737fbbffc090642d3c5767af7b50aa21077b8947bd07152322fe780f35a817"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/f597.flx",
+      "category": "game-data",
+      "size": 149001,
+      "sha256": "cf8fbe9741c55959137b3d53bfa99ab0ca437640988714f2e828d93d61aea48c"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/f666.flx",
+      "category": "game-data",
+      "size": 624805,
+      "sha256": "a02fe16afb3e61950fbf3d4f22c6ee8fe1a60d5d52b2af13aa9a99c7ffa79abe"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/f80.flx",
+      "category": "game-data",
+      "size": 836044,
+      "sha256": "acb02606ab1640cc58ac9872718e4984e5edb062919fdac008984526952e0b14"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/index.json",
+      "category": "game-data",
+      "size": 442,
+      "sha256": "1e4edad284e445cf364f2a06fb1ce26fa8e712618d5f7bef7285e35902330fc3"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/music.flx",
+      "category": "game-data",
+      "size": 1378135,
+      "sha256": "9d3308c6e3f4e712275d59615e23391aa49a809b6fd3b94b13303c0dfad64e65"
+    },
+    {
+      "path": "data/games/ultima8-fr/sound/sound.flx",
+      "category": "game-data",
+      "size": 1229584,
+      "sha256": "5fc4468b503aea62e53421f4204a1cbfbfa9f262e1e471394770f1d39f78ccfe"
+    },
+    {
+      "path": "data/games/ultima8/ailxmi.dll",
+      "category": "game-data",
+      "size": 13191,
+      "sha256": "7b9f1b8a50cc87be7940e79e809aa02e937b7b236ece4fc387655e940447a30b"
+    },
+    {
+      "path": "data/games/ultima8/index.json",
+      "category": "game-data",
+      "size": 226,
+      "sha256": "2a1b0f5a9b1040c375de1f5630024194918ae0cecc527ee443091262ab1850c3"
+    },
+    {
+      "path": "data/games/ultima8/u8.exe",
+      "category": "game-data",
+      "size": 935440,
+      "sha256": "1b1f470832e699a1eb4521f485acba8f1e62b641492a61de5c8d2561b01f3f6f"
+    },
+    {
+      "path": "data/games/ultima8/u8.ini",
+      "category": "game-data",
+      "size": 80,
+      "sha256": "8926c546f20085326b92ac5e540e8441d47eb44d19506379ff68cbf054fd6f3b"
+    },
+    {
+      "path": "data/games/ultima8/u8hd_2.pak",
+      "category": "game-data",
+      "size": 124712054,
+      "sha256": "58e076621a0208c20aad2946370661e541c8906d32b88342f0af03d2a265ec14"
+    },
+    {
+      "path": "data/games/ultima8/u8hd_4.pak",
+      "category": "game-data",
+      "size": 463381622,
+      "sha256": "ed21a6b887cb3023a3b25562201f9349816e9f392aa9c82c06bdbf2bbb586119"
+    },
+    {
+      "path": "data/games/ultima8/u8hd_midpoints_v1_s2.pak",
+      "category": "game-data",
+      "size": 1576356,
+      "sha256": "4e7a6ce4fe4d43a61630a6fd4fefc16fc22ae5ed906ef1818c44d4c63aa5207e"
+    },
+    {
+      "path": "data/games/ultima8/u8hd_ui_s2.pak",
+      "category": "game-data",
+      "size": 8759992,
+      "sha256": "cbf15d605a9f18d17014db64b0c74fb7725c1ac7be085bac8457fcc890b190af"
+    },
+    {
+      "path": "data/games/ultima8/usecode/eusecode.flx",
+      "category": "game-data",
+      "size": 1251108,
+      "sha256": "5eceb14286f06f6bb07c35d0c83c0670d500474cd9a7390ad533c0f0f93f4e38"
+    },
+    {
+      "path": "data/games/ultima8/usecode/index.json",
+      "category": "game-data",
+      "size": 46,
+      "sha256": "1d53b2b996cafbb2473d4fe3aad0e34de752e9f8b794636c2165f843ac6a2118"
+    },
+    {
+      "path": "data/games/ultima8/usecode/unkcoff.dat",
+      "category": "game-data",
+      "size": 1024,
+      "sha256": "8763cb68d4435ee4065b41dc32b7136e8fd1224359598f0ddcc5406e20f063a4"
+    },
+    {
+      "path": "data/games/ultima8/static/anim.dat",
+      "category": "game-data",
+      "size": 402184,
+      "sha256": "e3a9f4eaf3cb7e846aaee8856c83a73fe72274b4cb57f8a9ae38109bc6adaf5c"
+    },
+    {
+      "path": "data/games/ultima8/static/ecredits.dat",
+      "category": "game-data",
+      "size": 5592,
+      "sha256": "f20e3e62d359243a8560e562ac775ed34120bdb9f1bac250f3e649e6456864be"
+    },
+    {
+      "path": "data/games/ultima8/static/eintro.skf",
+      "category": "game-data",
+      "size": 1297731,
+      "sha256": "33ff48d4a9d311ef7f296e58e7f2e3649501acbf693c2762e405a90ff7687cc8"
+    },
+    {
+      "path": "data/games/ultima8/static/endgame.skf",
+      "category": "game-data",
+      "size": 767670,
+      "sha256": "58dcf21b0be05a249afd1ad9da3686bb134706bcb6e35e45cceb9a07b21702ed"
+    },
+    {
+      "path": "data/games/ultima8/static/fixed.dat",
+      "category": "game-data",
+      "size": 1403824,
+      "sha256": "2ef821057eab275042818f984ff83e0d5e7680b5c035fd88bb837ead13f22705"
+    },
+    {
+      "path": "data/games/ultima8/static/glob.flx",
+      "category": "game-data",
+      "size": 296916,
+      "sha256": "5b627dad8863519fb9a1c1b45a8ee116b3b85d3642d5794a09fbd063b5370cfc"
+    },
+    {
+      "path": "data/games/ultima8/static/gumpage.dat",
+      "category": "game-data",
+      "size": 416,
+      "sha256": "4b3dc0ab938f068b697ca1b6733223b06ce908b0f6e96c87413df9e4ca952a5d"
+    },
+    {
+      "path": "data/games/ultima8/static/index.json",
+      "category": "game-data",
+      "size": 349,
+      "sha256": "4fc682875dad052b7c0057fe4c436bae81e77c67d3de245b465d3ac4f2fa0c11"
+    },
+    {
+      "path": "data/games/ultima8/static/quotes.dat",
+      "category": "game-data",
+      "size": 8084,
+      "sha256": "d5ed671e855ed93ed5ae08fb8ef092a9f63a6d1c967dc20289b4891d6391e80e"
+    },
+    {
+      "path": "data/games/ultima8/static/typeflag.dat",
+      "category": "game-data",
+      "size": 16384,
+      "sha256": "2b07f4a6acc5504d9d07c47d3686f74107cac7b594ccb18251e01249fadebc62"
+    },
+    {
+      "path": "data/games/ultima8/static/u8fonts.flx",
+      "category": "game-data",
+      "size": 233563,
+      "sha256": "a9cfaa1cb0948fb5495ff8c6a5330e2290ef3fc5e754c284e306d7a29fdbb513"
+    },
+    {
+      "path": "data/games/ultima8/static/u8gumps.flx",
+      "category": "game-data",
+      "size": 266615,
+      "sha256": "7698251200f483027c5cd3728ca62b812fe0b249f8ff1916c3779545fc9bd3f4"
+    },
+    {
+      "path": "data/games/ultima8/static/u8mouse.shp",
+      "category": "game-data",
+      "size": 6554,
+      "sha256": "58b8d7f441110a2a66b3614f5a3290621b7cd8a86d9bd608976fcb905d9255a9"
+    },
+    {
+      "path": "data/games/ultima8/static/u8pal.pal",
+      "category": "game-data",
+      "size": 772,
+      "sha256": "738e609f43a99427c3809d09d4fc56af61a6bfef01b78cc5d11022e9d90bc0b2"
+    },
+    {
+      "path": "data/games/ultima8/static/u8shapes.flx",
+      "category": "game-data",
+      "size": 15374715,
+      "sha256": "9f2a2dc9076c5d06d1a7023822466273ed6291ef0243a4283a5b5f551e36dbda"
+    },
+    {
+      "path": "data/games/ultima8/static/wpnovlay.dat",
+      "category": "game-data",
+      "size": 56320,
+      "sha256": "99dd7fa2ce57951f1247f8947b1d11c322b61a5c4acb0fe8d662670dfa289eee"
+    },
+    {
+      "path": "data/games/ultima8/static/xformpal.dat",
+      "category": "game-data",
+      "size": 2480,
+      "sha256": "cce331f61ef0b7bb8f3f3e4c5fd520fcd32edd3006e76b72b80c62ea76f5542c"
+    },
+    {
+      "path": "data/games/ultima8/savegame/index.json",
+      "category": "game-data",
+      "size": 22,
+      "sha256": "ad0aba5493d4be0c3370a5ab553ee64a5ba3ab9255461742bc5a2aa887f8fe54"
+    },
+    {
+      "path": "data/games/ultima8/savegame/u8save.000",
+      "category": "game-data",
+      "size": 419047,
+      "sha256": "2475bc036a09729098fd57b0a787b2591a4e91069c6891b3c7befee44a7e8507"
+    },
+    {
+      "path": "data/games/ultima8/sound/a16mt32.dll",
+      "category": "game-data",
+      "size": 13191,
+      "sha256": "7b9f1b8a50cc87be7940e79e809aa02e937b7b236ece4fc387655e940447a30b"
+    },
+    {
+      "path": "data/games/ultima8/sound/a16sbfm.dll",
+      "category": "game-data",
+      "size": 18568,
+      "sha256": "b8f98a1f8f16b3f27ff0c4d5eb1b616350bb5a35715127e26d1a8904a1e95bd5"
+    },
+    {
+      "path": "data/games/ultima8/sound/e109.flx",
+      "category": "game-data",
+      "size": 197562,
+      "sha256": "2d51753ccd18820414f09e9e2757a597dd8bfa9ad58b5071a02cc19f8082b46d"
+    },
+    {
+      "path": "data/games/ultima8/sound/e129.flx",
+      "category": "game-data",
+      "size": 248768,
+      "sha256": "31d8cb1d2d171ea091ca4567a375dde57b87940db97dcaeb705602da60ac7bb1"
+    },
+    {
+      "path": "data/games/ultima8/sound/e289.flx",
+      "category": "game-data",
+      "size": 68649,
+      "sha256": "d45311971221897e4e5812fb7d2d07023a24763ace11dc8cdfb020a472f57b7c"
+    },
+    {
+      "path": "data/games/ultima8/sound/e385.flx",
+      "category": "game-data",
+      "size": 935537,
+      "sha256": "412df7585f5d7c4f5b3890393f0b2d658d3ce4ff0ab6d11f3ff5d8e80462a8b9"
+    },
+    {
+      "path": "data/games/ultima8/sound/e433.flx",
+      "category": "game-data",
+      "size": 414824,
+      "sha256": "ba1ccef983ca95766a906500ecfae6902287d45bc2788d9d193b91695adc307b"
+    },
+    {
+      "path": "data/games/ultima8/sound/e44.flx",
+      "category": "game-data",
+      "size": 282980,
+      "sha256": "bb33f60e1f5e5eac961649ae63edc28df691fe58715912d7dab049dcf7d543ba"
+    },
+    {
+      "path": "data/games/ultima8/sound/e597.flx",
+      "category": "game-data",
+      "size": 178597,
+      "sha256": "0cb23fb4c9dff9c9625efb4d8855757a7778ce6b7c7af5a909c2d4a65d61d96b"
+    },
+    {
+      "path": "data/games/ultima8/sound/e666.flx",
+      "category": "game-data",
+      "size": 464180,
+      "sha256": "57ffacac40734d7437d2a43fb162406732137d9c10457049acb49790bae38dc9"
+    },
+    {
+      "path": "data/games/ultima8/sound/e80.flx",
+      "category": "game-data",
+      "size": 840523,
+      "sha256": "9278d1ae297806949833f89ad4bd6f991420e2cd231e055726201ce12ccc5a41"
+    },
+    {
+      "path": "data/games/ultima8/sound/index.json",
+      "category": "game-data",
+      "size": 265,
+      "sha256": "402736508f677ce5339a54a8f09f6aef35ae71555d371a7bf6792aa45e446ed2"
+    },
+    {
+      "path": "data/games/ultima8/sound/music.flx",
+      "category": "game-data",
+      "size": 1378135,
+      "sha256": "9d3308c6e3f4e712275d59615e23391aa49a809b6fd3b94b13303c0dfad64e65"
+    },
+    {
+      "path": "data/games/ultima8/sound/sound.flx",
+      "category": "game-data",
+      "size": 1229584,
+      "sha256": "5fc4468b503aea62e53421f4204a1cbfbfa9f262e1e471394770f1d39f78ccfe"
+    }
+  ]
+}

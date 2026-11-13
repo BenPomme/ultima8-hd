@@ -1,0 +1,20 @@
+name = "u8hd-benpomme-devon-proxy"
+account_id = "46633be617e65e1cc51596591b7f520c"
+workers_dev = true
+main = "worker.mjs"
+compatibility_date = "2026-01-01"
+
+# Public endpoint URL is configured in the Pages meta tag (see README/notes).
+# Secret OPENROUTER_KEY is set via `wrangler secret put OPENROUTER_KEY` (never in file).
+
+[[durable_objects.bindings]]
+name = "NPC_GUARD"
+class_name = "NpcGuard"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["NpcGuard"]
+
+[vars]
+# Comma-separated origin allowlist (override for final deployment).
+ALLOWED_ORIGINS = "https://benpomme.github.io"

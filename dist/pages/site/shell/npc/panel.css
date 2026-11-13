@@ -1,0 +1,67 @@
+/* web/npc/panel.css
+   Styles for the optional NPC chat panel. Everything is scoped under
+   #npc-chat-panel so the module cannot restyle the shell or the engine canvas.
+   The panel only exists when the feature is enabled. */
+
+#npc-chat-panel {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  width: min(360px, 42vw);
+  max-height: 48vh;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(12, 10, 20, 0.86);
+  border: 1px solid rgba(180, 160, 220, 0.28);
+  color: #e8e3f5;
+  font: 13px/1.4 system-ui, sans-serif;
+  z-index: 40;
+}
+
+#npc-chat-panel .npc-panel-log {
+  overflow-y: auto;
+  max-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#npc-chat-panel .npc-line { margin: 0; }
+#npc-chat-panel .npc-line-player { color: #b9d4ff; }
+#npc-chat-panel .npc-line-npc { color: #ffe9c2; }
+#npc-chat-panel .npc-line-system { color: #9d9ab0; font-style: italic; }
+#npc-chat-panel .npc-line-error { color: #ffb4b4; }
+
+#npc-chat-panel .npc-panel-form { display: flex; gap: 6px; }
+
+#npc-chat-panel .npc-panel-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(180, 160, 220, 0.35);
+  background: rgba(0, 0, 0, 0.35);
+  color: inherit;
+}
+
+#npc-chat-panel .npc-panel-controls { display: flex; flex-wrap: wrap; gap: 6px; }
+
+#npc-chat-panel button {
+  padding: 5px 9px;
+  border-radius: 8px;
+  border: 1px solid rgba(180, 160, 220, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  cursor: pointer;
+}
+
+#npc-chat-panel button:hover { background: rgba(255, 255, 255, 0.12); }
+
+#npc-chat-panel .npc-panel-note {
+  margin: 0;
+  font-size: 11px;
+  color: #9d9ab0;
+}

@@ -1,0 +1,18 @@
+<!-- web/npc/include.html
+     Exact script/style includes for the NPC chat module, for host mechanical
+     packaging into the accepted shell (inputs/shell/index.html). This file does
+     NOT edit the shell.
+
+     Placement:
+       1. Add the <link> to <head>, AFTER ./ui/theme.css (theme first, module
+          styles override).
+       2. Add the <script type="module"> AFTER ./ui/app.js, so the shell boots
+          first and the module attaches to an already-mounted engine iframe.
+
+     Both are inert by default: web/npc/index.js reads its settings, sees the
+     panel disabled, and does nothing at all.
+-->
+<link rel="stylesheet" href="./npc/panel.css" />
+<script type="module" src="./npc/index.js"></script>
+
+<meta name="npcchat-endpoint" content="">

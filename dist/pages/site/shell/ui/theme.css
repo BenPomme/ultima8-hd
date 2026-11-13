@@ -1,0 +1,333 @@
+/* shell/ui/theme.css — landscape-first shell theme. No hover-only affordances. */
+:root {
+  --bg: #0c0a14;
+  --panel: #171325;
+  --panel-2: #211a33;
+  --ink: #ece7f8;
+  --muted: #a99fc4;
+  --accent: #d8b25a;
+  --accent-2: #7c5cff;
+  --danger: #e07a7a;
+  --radius: 14px;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); }
+body {
+  font: 16px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.app {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: calc(12px + var(--safe-t)) calc(12px + var(--safe-r)) calc(12px + var(--safe-b)) calc(12px + var(--safe-l));
+}
+
+.card {
+  width: min(560px, 94vw);
+  max-height: 92%;
+  overflow: auto;
+  background: linear-gradient(160deg, var(--panel), var(--panel-2));
+  border: 1px solid #372c52;
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title { margin: 0; font-size: 1.5rem; letter-spacing: 0.02em; }
+.subtitle { margin: 0; color: var(--muted); }
+.stack { display: flex; flex-direction: column; gap: 10px; }
+.stack.row { flex-direction: row; }
+.stack.row .btn { flex: 1; }
+
+.btn {
+  appearance: none;
+  border: 1px solid #4a3c6e;
+  background: #241d38;
+  color: var(--ink);
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  min-height: 46px;
+}
+.btn:active { transform: translateY(1px); background: #2e2547; }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn.primary { background: linear-gradient(180deg, #8a6b1f, #6a4f12); border-color: var(--accent); font-weight: 600; }
+.btn.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+
+.segmented { display: flex; gap: 8px; }
+.segmented .btn { flex: 1; }
+
+.field { display: grid; gap: 4px; }
+.field-label { font-size: 0.85rem; color: var(--muted); }
+.field-hint { color: var(--muted); font-size: 0.8rem; }
+.range { width: 100%; accent-color: var(--accent); }
+.check { width: 26px; height: 26px; accent-color: var(--accent); }
+
+.text-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1.1rem;
+  color: var(--ink);
+  background: #100c1c;
+  border: 1px solid #4a3c6e;
+  border-radius: 10px;
+}
+
+.progress { height: 12px; background: #100c1c; border-radius: 999px; overflow: hidden; }
+.progress .bar { display: block; height: 100%; width: 38%; background: linear-gradient(90deg, var(--accent-2), var(--accent)); animation: slide 1.4s ease-in-out infinite; }
+@keyframes slide { 0% { margin-left: -38%; } 100% { margin-left: 100%; } }
+
+.bind-list { display: flex; flex-direction: column; gap: 6px; max-height: 44vh; overflow: auto; }
+.bind-row { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; background: #1c1730; border-radius: 8px; padding: 8px 10px; }
+.bind-action { text-transform: capitalize; }
+.bind-keys { display: flex; gap: 6px; flex-wrap: wrap; }
+.bind-keys kbd { background: #0e0b18; border: 1px solid #4a3c6e; border-radius: 6px; padding: 2px 8px; font-family: ui-monospace, monospace; }
+.muted { color: var(--muted); font-style: italic; }
+.await { color: var(--accent); font-weight: 600; }
+.notice { background: #241d38; border-left: 3px solid var(--accent); padding: 8px 10px; border-radius: 8px; display: grid; gap: 4px; font-size: 0.85rem; }
+
+/* --- Play stage, HUD and touch controls ---------------------------------- */
+.stage { position: fixed; inset: 0; }
+.viewport { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 30%, #241a3d, #0a0812 70%); }
+.hud { position: absolute; top: calc(8px + var(--safe-t)); left: calc(10px + var(--safe-l)); display: flex; gap: 8px; flex-wrap: wrap; pointer-events: none; }
+.hud-cell { background: rgba(12, 10, 20, 0.66); border: 1px solid #372c52; border-radius: 8px; padding: 4px 10px; display: grid; min-width: 74px; }
+/* The cell's own `display: grid` (an author rule) would win over the UA
+   [hidden] rule, leaving an empty Health/Place box. This scoped rule makes the
+   `hidden` attribute actually hide a cell whose value the engine never sent. */
+.hud-cell[hidden] { display: none; }
+.hud-k { font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.hud-v { font-size: 0.95rem; }
+.play-controls { position: absolute; top: calc(8px + var(--safe-t)); right: calc(10px + var(--safe-r)); display: flex; gap: 8px; pointer-events: auto; }
+.pause-btn, .fs-btn { min-height: 44px; min-width: 52px; font-size: 1.2rem; }
+
+.touch-layer { position: fixed; inset: 0; pointer-events: none; }
+.touch-layer > * { pointer-events: auto; }
+
+.stick {
+  position: absolute;
+  left: calc(20px + var(--safe-l));
+  bottom: calc(22px + var(--safe-b));
+  width: 132px; height: 132px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%, rgba(124, 92, 255, 0.22), rgba(12, 10, 20, 0.5));
+  border: 2px solid #4a3c6e;
+  touch-action: none;
+  user-select: none;
+}
+.stick-knob {
+  position: absolute; left: 50%; top: 50%;
+  width: 58px; height: 58px; margin: -29px 0 0 -29px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #b7a6ff, #5b41c8);
+  border: 2px solid #cdbcff;
+  transition: transform 40ms linear;
+}
+
+.pad {
+  position: absolute;
+  right: calc(18px + var(--safe-r));
+  bottom: calc(18px + var(--safe-b));
+  display: grid;
+  /* Two columns keep the whole pad inside the right 20vw band, clear of the
+     central 60% play area even on the narrowest landscape phones (844px). */
+  --pad-btn: 62px;
+  grid-template-columns: repeat(2, var(--pad-btn));
+  gap: 10px;
+  touch-action: none;
+}
+.pad-btn {
+  width: var(--pad-btn); height: var(--pad-btn);
+  border-radius: 50%;
+  border: 2px solid #5a4a86;
+  background: radial-gradient(circle at 40% 35%, #2c2350, #17122a);
+  color: var(--ink);
+  display: grid; place-items: center;
+  font-size: 1.5rem;
+  touch-action: none;
+  user-select: none;
+}
+.pad-btn:active { background: radial-gradient(circle at 40% 35%, #4a3a86, #241c46); transform: scale(0.96); }
+.pad-buttonA { border-color: var(--danger); }
+.pad-buttonD { border-color: var(--accent-2); }
+.pad-buttonMenu { border-color: var(--accent); }
+
+/* --- Portrait rotate prompt ---------------------------------------------- */
+.rotate { display: none; }
+body.portrait .rotate {
+  display: grid;
+  position: fixed; inset: 0;
+  place-items: center;
+  background: var(--bg);
+  z-index: 50;
+  padding: 24px;
+}
+.rotate-card { display: grid; gap: 12px; place-items: center; text-align: center; max-width: 340px; }
+.rotate-icon { font-size: 3rem; color: var(--accent); animation: spin 2.4s ease-in-out infinite; }
+@keyframes spin { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-90deg); } }
+.rotate-text { color: var(--muted); margin: 0; }
+body.portrait .app { visibility: hidden; }
+.noscript { color: var(--ink); padding: 24px; }
+
+@media (max-width: 480px) {
+  .card { padding: 16px; }
+  .stick { width: 116px; height: 116px; }
+  .pad { --pad-btn: 52px; gap: 8px; }
+  .pad-btn { font-size: 1.3rem; }
+}
+
+/* --- Real engine surface (behind the shell) ------------------------------- */
+.engine-host {
+  position: fixed; inset: 0; z-index: 0;
+  display: none;
+  background: #000;
+}
+body.engine-live .engine-host { display: block; }
+.engine-frame { width: 100%; height: 100%; border: 0; display: block; background: #000; }
+
+/* The shell layers above the engine; only interactive controls take events, so
+   Classic clicks reach the engine while Modern gestures are captured by the
+   touch layer. */
+.app { z-index: 1; }
+body.engine-live .viewport { background: transparent; }
+.stage { pointer-events: none; }
+.stage button, .stage .btn, .stage .hud { pointer-events: auto; }
+.stage .hud { pointer-events: none; }
+
+/* Live play: the engine iframe sits BEHIND #app, so the shell root must not
+   swallow clicks meant for the game. While the PLAY screen is up, #app passes
+   pointer events through; the stage rules above re-enable the only controls that
+   need them (pause/fullscreen buttons and the touch layer's stick/pad). Title,
+   name, pause and settings screens never carry this class, so their cards stay
+   fully interactive. This is what makes document.elementsFromPoint over the
+   game area return the IFRAME instead of DIV#app. */
+body.engine-play .app { pointer-events: none; }
+
+/* --- Combat feedback overlay --------------------------------------------- */
+.u8-fx { position: fixed; inset: 0; z-index: 40; pointer-events: none; display: none; }
+.u8-fx.live { display: block; }
+.u8-flash {
+  position: absolute; inset: 0; opacity: 0;
+  transition: opacity 120ms ease-out;
+  mix-blend-mode: screen;
+}
+.u8-flash.on { opacity: 1; }
+.u8-flash[data-tone="hit"] { background: radial-gradient(circle at 50% 45%, rgba(255, 240, 200, 0.22), transparent 60%); }
+.u8-flash[data-tone="crit"] { background: radial-gradient(circle at 50% 45%, rgba(255, 220, 120, 0.36), transparent 62%); }
+.u8-flash[data-tone="hurt"] { background: radial-gradient(circle at 50% 50%, rgba(224, 90, 90, 0.42), transparent 70%); }
+.u8-flash[data-tone="block"] { background: radial-gradient(circle at 50% 45%, rgba(140, 190, 255, 0.30), transparent 60%); }
+.u8-flash[data-tone="ko"], .u8-flash[data-tone="death"] { background: rgba(10, 6, 14, 0.5); }
+
+.u8-numbers { position: absolute; inset: 0; overflow: hidden; }
+.u8-dmg {
+  position: absolute; left: 50%; top: 38%;
+  transform: translate(calc(-50% + var(--u8-dmg-x, 0px)), 0);
+  font-weight: 800; font-size: 1.4rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  animation: u8-float 900ms ease-out forwards;
+}
+.u8-dmg[data-tone="hit"] { color: #ffe9b0; }
+.u8-dmg[data-tone="crit"] { color: #ffb347; font-size: 1.9rem; }
+.u8-dmg[data-tone="hurt"] { color: #ff8a8a; }
+.u8-dmg[data-tone="death"] { color: #cabaf0; }
+@keyframes u8-float {
+  0% { opacity: 0; transform: translate(calc(-50% + var(--u8-dmg-x, 0px)), 10px) scale(0.8); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--u8-dmg-x, 0px)), -46px) scale(1.05); }
+}
+
+.u8-status {
+  position: absolute; left: 50%; bottom: calc(14% + var(--safe-b));
+  transform: translateX(-50%);
+  opacity: 0; transition: opacity 140ms ease-out;
+  background: rgba(12, 10, 20, 0.7);
+  border: 1px solid #372c52; border-radius: 8px;
+  padding: 3px 12px; font-size: 0.9rem; color: var(--ink);
+}
+.u8-status.on { opacity: 1; }
+.u8-status[data-tone="hurt"] { color: #ff8a8a; }
+.u8-status[data-tone="block"] { color: #a9c8ff; }
+
+.u8-shake { animation: u8-shake 180ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+@keyframes u8-shake {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(var(--u8-shake, 4px), calc(var(--u8-shake, 4px) * -0.4)); }
+  40% { transform: translate(calc(var(--u8-shake, 4px) * -0.8), calc(var(--u8-shake, 4px) * 0.3)); }
+  60% { transform: translate(calc(var(--u8-shake, 4px) * 0.6), calc(var(--u8-shake, 4px) * 0.4)); }
+  80% { transform: translate(calc(var(--u8-shake, 4px) * -0.4), 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u8-shake { animation: none; }
+  .u8-dmg { animation-duration: 1ms; }
+  .u8-flash { transition: none; }
+}
+
+/* --- Save export / import and message ------------------------------------ */
+.save-row { display: flex; gap: 10px; }
+.save-row .btn { flex: 1; }
+.message { margin: 0; color: var(--accent); font-size: 0.9rem; min-height: 1.1em; }
+.message[data-tone="error"] { color: var(--danger); }
+
+/* --- Optional Modern key art (host-accepted A1 asset) -------------------- */
+/* Modern title backdrop; a dark gradient always sits on top so the copy stays
+   legible, and the panel colour shows through if the asset is not served
+   (e.g. the shell is hosted without the sibling web/ tree). Classic keeps the
+   plain panel, so the untouched look stays available at runtime. */
+.card.keyart {
+  background-image:
+    linear-gradient(180deg, rgba(12, 10, 20, 0.68), rgba(12, 10, 20, 0.88)),
+    url("../../web/assets/modern/art/keyart_pagan_shore_16x9.webp");
+  background-size: cover, cover;
+  background-position: center, center;
+  border-color: rgba(216, 178, 90, 0.35);
+}
+
+/* --- Audio panel + "tap to enable sound" retry --------------------------- */
+/* The panel groups the live Music/SFX volumes, the Always-run toggle and the
+   engine's achieved-status line. It is pure settings UI, so it lives inside a
+   card like every other field. */
+.audio-panel {
+  display: grid; gap: 10px;
+  border: 1px solid #372c52; border-radius: 10px;
+  padding: 12px 14px; background: rgba(16, 12, 28, 0.55);
+}
+.audio-panel .field { display: grid; gap: 6px; }
+.panel-title { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.audio-status { margin: 0; color: var(--muted); font-size: 0.85rem; }
+.audio-status[data-tone="error"] { color: var(--danger); }
+
+/* Only shown while the engine's real SDL3 AudioContext is genuinely suspended.
+   It sits outside .app (child of #u8-fx) so the engine's world clicks still
+   pass through; pointer-events stays none until it is actually offered. */
+.u8-tap-sound {
+  position: fixed; left: 50%; bottom: calc(16% + var(--safe-b));
+  transform: translateX(-50%);
+  z-index: 60; pointer-events: none; opacity: 0;
+  transition: opacity 160ms ease-out;
+  appearance: none; border: 1px solid var(--accent);
+  background: rgba(12, 10, 20, 0.86); color: var(--accent);
+  padding: 8px 16px; border-radius: 999px; font-size: 0.95rem; font-weight: 600;
+}
+.u8-tap-sound.on { pointer-events: auto; opacity: 1; }
+
+/* --- Music source panel + restart confirm -------------------------------- */
+.music-panel .segmented .btn
+  { font-size: 0.9rem; }
+#u8-music-confirm
+  { z-index: 40; }

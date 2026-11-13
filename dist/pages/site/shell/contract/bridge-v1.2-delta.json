@@ -1,0 +1,185 @@
+{
+  "delta_of": "ultima8-engine-bridge v1 (contracts/bridge-v1.json) + v1.1 delta",
+  "applies_from": "E2c coordinate/name-prompt contract (CP14)",
+  "kind": "additive",
+  "no_frozen_member_changed": true,
+  "frozen_members_unchanged": {
+    "state_indices_0_38": "unchanged (0..24 E1/v1.1, 25..38 E2b TARGET_*/FIXTURE_*)",
+    "event_types_1_8": "unchanged",
+    "commands_1_8": "unchanged",
+    "gestures_1_8": "unchanged"
+  },
+  "preserved_aliases": {
+    "note": "These are the EXISTING names/indices the UI/L1 already reads. v1.2 does NOT rename, renumber or duplicate them.",
+    "HP": 7,
+    "MAX_HP": 8,
+    "IN_COMBAT": 3,
+    "MAP_NUM": 14
+  },
+  "canonical_contract_path": ".scratch/contracts/",
+  "worktree_contract_copy": "T2-wasm-build-spike/contracts/bridge-v1.2-delta.json",
+  "host_action": "copy contracts/bridge-v1.json, contracts/bridge-v1.1-delta.json AND contracts/bridge-v1.2-delta.json to the canonical .scratch/contracts path (worker sandbox is EPERM there)",
+  "changes": {
+    "state_fields": {
+      "added": {
+        "AVATAR_SCREEN_X": 39,
+        "AVATAR_SCREEN_Y": 40,
+        "AVATAR_SCREEN_OK": 41,
+        "LOGICAL_W": 42,
+        "LOGICAL_H": 43,
+        "WINDOW_W": 44,
+        "WINDOW_H": 45,
+        "GAME_DRAW_X": 46,
+        "GAME_DRAW_Y": 47,
+        "GAME_DRAW_W": 48,
+        "GAME_DRAW_H": 49,
+        "VIEWPORT_OK": 50,
+        "TEXT_INPUT_ACTIVE": 51
+      },
+      "meaning": {
+        "AVATAR_SCREEN_X/Y/OK": "The Avatar's own logical-screen 'feet' point, produced by the EXACT same pipeline as TARGET_SCREEN_X/Y: GameMapGump::GetLocationOfItem(avatarId, 256) -> Gump::GumpToScreenSpace(). AVATAR_SCREEN_OK(41) is the validity flag. These are engine-LOGICAL screen coords (the coordinate space Ultima8Bridge.gesture() consumes), NOT canvas/DOM pixels.",
+        "LOGICAL_W/LOGICAL_H": "The engine's virtual (logical) render dimensions, == OSystem::getWidth()/getHeight(), i.e. the coordinate space the engine's whole mouse/gesture pipeline and gump tree use (U8 default 320x200; 640x400 with usehighres). This is what TARGET_SCREEN_*/AVATAR_SCREEN_* are expressed in.",
+        "WINDOW_W/WINDOW_H": "The graphics window == the canvas BACKING-STORE size (WindowedGraphicsManager::getWindowWidth()/getWindowHeight()), in device/canvas pixels. May differ from LOGICAL_W/H (that is the whole point: logical != canvas).",
+        "GAME_DRAW_X/Y/W/H": "The exact letterbox draw rect the backend scales the LOGICAL surface into, inside WINDOW_W x WINDOW_H. This is the real backend _gameDrawRect (WindowedGraphicsManager::getGameDrawRect()), the same rect SDL_UpdateRects() renders into and convertWindowToVirtual() maps through. GAME_DRAW_X/Y are its top-left in canvas pixels; GAME_DRAW_W/H its scaled size. No guessed centres.",
+        "VIEWPORT_OK": "1 iff a windowed graphics backend was reached and GAME_DRAW_W/H > 0 (i.e. WINDOW_* and GAME_DRAW_* are valid). Feature-detect with this; if 0, viewport fields are unusable on this build.",
+        "TEXT_INPUT_ACTIVE": "1 iff a text-input widget (Ultima8 EditWidget) currently holds keyboard focus in the gump tree -- i.e. the ACTUAL name prompt is accepting text. Derived by walking GetFocusChild() down from Ultima8Engine::getDesktopGump() and dynamic_cast<EditWidget*>. READY(20) is NOT sufficient: getMainActor()!=nullptr (READY==1) is also true during the intro cinematic and in stasis (STASIS==1), where no prompt is up."
+      },
+      "indices_unchanged": "0..38 keep their v1/v1.1/E2b meaning; all v1.2 fields are appended after FIXTURE_HP_CAP(38)."
+    },
+    "coordinate_projection": {
+      "summary": "TARGET_SCREEN_X/Y (32/33, v1.1) and the new AVATAR_SCREEN_X/Y (39/40) are the engine's own projection of an actor's 'feet' point into LOGICAL screen space. They are NOT canvas/DOM/pixels. The UI must map DOM->logical before sending a gesture, using the viewport fields below.",
+      "pipeline": [
+        "GameMapGump::GetLocationOfItem(itemid, gx, gy, lerp_factor=256): gx=(i.x-i.y)/4 - (c.x-c.y)/4 ; gy=(i.x+i.y)/8 - i.z - ((c.x+c.y)/8 - c.z), where i = item lerped location, c = camera lerped location -> gump-local camera-centred coords.",
+        "Gump::GumpToScreenSpace(gx, gy): recursive add of (_x - _dims.left) up the parent chain -> absolute LOGICAL screen coords.",
+        "GameMapGump::onMouseDown(button, mx, my) performs exactly ParentToGump() then GumpToScreenSpace() before handing (sx,sy) to AvatarMoverProcess. Therefore AVATAR_SCREEN_*/TARGET_SCREEN_* are the same values the engine's own mouse-click path consumes == what bridge_gesture() takes."
+      ],
+      "source_cites": [
+        "engines/ultima/ultima8/gumps/game_map_gump.cpp:229 (GetLocationOfItem)",
+        "engines/ultima/ultima8/gumps/game_map_gump.cpp:270 (onMouseDown -> GumpToScreenSpace)",
+        "engines/ultima/ultima8/gumps/gump.cpp:414 (GumpToScreenSpace)"
+      ]
+    },
+    "viewport_letterbox": {
+      "why": "The UI historically converted DOM client coords straight to HTML canvas.width/height (e.g. 780x456 / 900x600) and treated those as engine coords. But TARGET_SCREEN_X/Y (172,126 observed) are LOGICAL (320x200 space). The canvas is a letterboxed, scaled view of the logical surface, so 1 logical unit != 1 canvas pixel.",
+      "engine_render_dims": {
+        "fields": [
+          "LOGICAL_W",
+          "LOGICAL_H"
+        ],
+        "source_cites": [
+          "common/system.h:1227 (OSystem::getWidth), common/system.h:1218 (OSystem::getHeight)",
+          "engines/ultima/ultima8/ultima8.h:203 (U8_DEFAULT_SCREEN_WIDTH=320, U8_DEFAULT_SCREEN_HEIGHT=200)",
+          "engines/ultima/ultima8/ultima8.h:208 (U8_HIRES_SCREEN_WIDTH=640, U8_HIRES_SCREEN_HEIGHT=400)",
+          "engines/ultima/ultima8/ultima8.cpp:508 (startupGame registers width/height default from usehighres)",
+          "engines/ultima/ultima8/ultima8.cpp:1335 (setupCoreGumps builds Desktop/Inverter/GameMapGump at _screen->getSurfaceDims())"
+        ]
+      },
+      "canvas_letterbox": {
+        "fields": [
+          "WINDOW_W",
+          "WINDOW_H",
+          "GAME_DRAW_X",
+          "GAME_DRAW_Y",
+          "GAME_DRAW_W",
+          "GAME_DRAW_H",
+          "VIEWPORT_OK"
+        ],
+        "semantics": "WINDOW_* = canvas backing-store size. GAME_DRAW_* = the real scaled draw rect of the logical surface inside the canvas (centred/aligned per stretch mode; aspect-preserved for U8 since gameNeedsAspectRatioCorrection() is true -> desired aspect 4/3). Sourced from the live backend, not recomputed.",
+        "backend_math": [
+          "backends/graphics/windowed.h:270 convertWindowToVirtual: logicalX = ((winX - drawRect.left) * logicalW + drawRect.w/2) / drawRect.w  (y analogous)",
+          "backends/graphics/windowed.h:228 convertVirtualToWindow: winX = drawRect.left + (logicalX * drawRect.w + logicalW/2) / logicalW  (y analogous)",
+          "backends/graphics/windowed.h:581 populateDisplayAreaDrawRect: builds _gameDrawRect (STRETCH_CENTER/INTEGRAL/FIT...); _gameDrawRect at :519",
+          "backends/graphics/surfacesdl/surfacesdl-graphics.cpp:3157 SDL_UpdateRects consumes _gameDrawRect as the SDL_RenderTexture viewport",
+          "backends/graphics/windowed.h:196 getGameDrawRect() -- NEW additive read-only accessor returning _gameDrawRect",
+          "backends/graphics/windowed.h:189/190 getWindowWidth()/getWindowHeight()",
+          "backends/modular-backend.h:65 ModularGraphicsBackend::getGraphicsManager()"
+        ],
+        "engine_access_path": "dynamic_cast<ModularGraphicsBackend*>(g_system) -> getGraphicsManager() -> dynamic_cast<WindowedGraphicsManager*>(gm) -> getWindowWidth()/getWindowHeight()/getGameDrawRect(). VIEWPORT_OK=0 if any step fails (e.g. non-windowed backend).",
+        "featuredetect": "Read VIEWPORT_OK(50). ==1 -> WINDOW_*/GAME_DRAW_* valid; use them. ==0 -> the UI must fall back to a full-window assumption or decline the coordinate gesture (do NOT silently reuse canvas.width/height)."
+      }
+    },
+    "name_prompt": {
+      "field": "TEXT_INPUT_ACTIVE",
+      "index": 51,
+      "semantics": "1 iff an Ultima8 EditWidget (the name-entry text field) holds keyboard focus. This is the ACTUAL prompt, distinct from READY(20) which is 1 whenever getMainActor()!=nullptr (also true during the intro and in stasis).",
+      "derivation": "Ultima8Engine::getDesktopGump() -> follow Gump::GetFocusChild() until null -> dynamic_cast<EditWidget*>. MenuGump::InitGump() creates EditWidget(0,0,'',true,6,110,40,15) and calls MakeFocus(); Gump::OnTextInput() dispatches to _focusChild.",
+      "source_cites": [
+        "engines/ultima/ultima8/gumps/widgets/edit_widget.h (EditWidget, OnTextInput/OnFocus)",
+        "engines/ultima/ultima8/gumps/menu_gump.cpp:172 (EditWidget created)",
+        "engines/ultima/ultima8/gumps/menu_gump.cpp:175 (MakeFocus)",
+        "engines/ultima/ultima8/gumps/gump.h:349 (GetFocusChild), gump.h:344 (IsFocus)",
+        "engines/ultima/ultima8/gumps/gump.cpp:728 (OnTextInput -> _focusChild)",
+        "engines/ultima/ultima8/ultima8.h:286 (getDesktopGump)"
+      ],
+      "note": "No name SETTER is added or invented. The engine only REPORTS focus; text still flows through the real engine key/text-input path."
+    },
+    "js_glue": {
+      "state_names_added": [
+        "AVATAR_SCREEN_X",
+        "AVATAR_SCREEN_Y",
+        "AVATAR_SCREEN_OK",
+        "LOGICAL_W",
+        "LOGICAL_H",
+        "WINDOW_W",
+        "WINDOW_H",
+        "GAME_DRAW_X",
+        "GAME_DRAW_Y",
+        "GAME_DRAW_W",
+        "GAME_DRAW_H",
+        "VIEWPORT_OK",
+        "TEXT_INPUT_ACTIVE"
+      ],
+      "api_added": [
+        "Ultima8Bridge.viewport()",
+        "Ultima8Bridge.clientToLogical(clientX, clientY)"
+      ],
+      "no_existing_api_changed": true
+    },
+    "ui_integration_hook": {
+      "authored_by": "engine (T2)",
+      "status": "source-defined; the ONLY safe DOM->logical mapping. Do NOT convert client coords to canvas.width/height directly.",
+      "model_authored_js": "var v = Ultima8Bridge.viewport();\nif (!v.ok) { /* viewport unknown: do not send a coordinate gesture */ }\nvar p = Ultima8Bridge.clientToLogical(ev.clientX, ev.clientY);   // { x, y, ok } in engine-logical coords\nif (p.ok) Ultima8Bridge.gesture(Ultima8Bridge.GESTURE.ATTACK_DOUBLECLICK_LEFT, p.x, p.y, 0);",
+      "equivalent_manual_math": "cx = (clientX - rect.left) * WINDOW_W / rect.width; cy = (clientY - rect.top) * WINDOW_H / rect.height; logicalX = round((cx - GAME_DRAW_X) * LOGICAL_W / GAME_DRAW_W); logicalY = round((cy - GAME_DRAW_Y) * LOGICAL_H / GAME_DRAW_H).",
+      "for_avatar_targeted_gestures": "Prefer AVATAR_SCREEN_X/Y (to toggle stance on the Avatar) and TARGET_SCREEN_X/Y (to attack/kick a target) directly -- they are already logical coords and need no DOM mapping."
+    },
+    "featuredetect": {
+      "yamlish": {
+        "STATE count": "STATE_NAMES.length >= 52 (or readState(51) returns a number)",
+        "viewport": "readState(50) === 1 && readState(48) > 0 && readState(49) > 0",
+        "name_prompt": "readState(51) === 1",
+        "avatar_projection": "readState(41) === 1"
+      },
+      "text": "Consumers must feature-detect v1.2 via the STATE map (presence of TEXT_INPUT_ACTIVE/VIEWPORT_OK) rather than assume it; all 0..38 fields/names/events are unchanged so a v1.1 consumer keeps working."
+    }
+  },
+  "source_cites": [
+    "engines/ultima/ultima8/gumps/game_map_gump.cpp:229",
+    "engines/ultima/ultima8/gumps/game_map_gump.cpp:270",
+    "engines/ultima/ultima8/gumps/gump.cpp:414",
+    "engines/ultima/ultima8/gumps/gump.h:344",
+    "engines/ultima/ultima8/gumps/gump.h:349",
+    "engines/ultima/ultima8/gumps/menu_gump.cpp:172",
+    "engines/ultima/ultima8/gumps/menu_gump.cpp:175",
+    "engines/ultima/ultima8/ultima8.h:203",
+    "engines/ultima/ultima8/ultima8.h:208",
+    "engines/ultima/ultima8/ultima8.h:283",
+    "engines/ultima/ultima8/ultima8.h:286",
+    "engines/ultima/ultima8/ultima8.cpp:508",
+    "engines/ultima/ultima8/ultima8.cpp:1335",
+    "common/system.h:1218",
+    "common/system.h:1227",
+    "backends/graphics/windowed.h:189",
+    "backends/graphics/windowed.h:196",
+    "backends/graphics/windowed.h:228",
+    "backends/graphics/windowed.h:270",
+    "backends/graphics/windowed.h:519",
+    "backends/graphics/windowed.h:581",
+    "backends/modular-backend.h:65"
+  ],
+  "build": {
+    "wasm_md5_combat_build_e2": "d2a01f7a26c3e4e96abf783c9952d0df",
+    "wasm_md5_combat_build_e2b": "21ebe66b233ad22571b7bc7276a3f94a",
+    "wasm_md5_e2c": "PENDING_BUILD",
+    "full_patch": "T2-wasm-build-spike/patches/T2-combat-E2.patch"
+  }
+}

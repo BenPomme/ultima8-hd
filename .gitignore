@@ -1,0 +1,10 @@
+**/u8hd_2.pak
+**/u8hd_4.pak
+node_modules/
+.wrangler/
+__pycache__/
+*.pyc
+.DS_Store
+.env*
+.dev.vars*
+release-manifest/

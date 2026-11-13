@@ -1,0 +1,7 @@
+HD preview configuration, Claude CP38
+
+Style B is the shipped art profile. The proof subset is active; full-game B packs and animation V1 are not yet integrated. Profile A remains QA-only.
+
+Both B scale packs are installed side by side. The native [ultima8] scummvm.ini setting selects graphics at startup: hd_scale=1 for original graphics, hd_scale=2 for B2 (default), hd_scale=4 for B4 (manual desktop option). Change the installation configuration and fully restart the native engine. Existing browser installations may retain their own persisted native configuration; changing only the server seed INI does not replace that stored file. The shell has no graphics-scale selector at this checkpoint.
+
+The shell Classic/Modern toggle changes controls, speed and audio enhancements independently of graphics scale. It does not switch HD art. A4 is not shipped. No mobile fit is claimed for B4.

@@ -1,0 +1,66 @@
+--- a/shell/ui/app.js	2026-11-11 19:34:08
++++ b/shell/ui/app.js	2026-11-11 19:34:41
+@@ -17,6 +17,7 @@
+ import { createHaptics } from "./feedback/haptics.js";
+ import { downloadBytes, pickSaveFile, saveFileName } from "./saves.js";
+ import { loadSettings, saveSettings } from "./persist.js";
++import { mountFrameFilter } from "../visual/framefilter.js";
+ 
+ function safeStorage(win) {
+   try { return win.localStorage ?? null; } catch { return null; }
+@@ -75,6 +76,19 @@
+   // then lets the bridge's readiness pump run. The name screen mounts it too:
+   // the game boots its own menu underneath the shell's native name proxy.
+   let engineMounted = false;
++  let frameFilter = null;
++
++  // Presentation-only Modern filter: re-presents the real engine frame through
++  // an edge-aware Scale2x overlay. Reads the iframe canvas, never writes to it,
++  // and never changes its bounds/resolution, so SDL/bridge input is unaffected.
++  // Created detached and attached only on world-ready. Guarded so a missing or
++  // renamed anchor degrades to "no filter", never a crash.
++  function ensureFilter(frame) {
++    if (!frame) return;
++    try { frameFilter = mountFrameFilter(frame, { mode: state.settings.mode, autoAttach: false }); }
++    catch { frameFilter = null; }
++  }
++
+   async function mountEngine() {
+     if (bridge.mode !== "real" || engineMounted) return;
+     engineMounted = true;
+@@ -86,6 +100,7 @@
+         engineHost.append(frame);
+       }
+       attachFrameKeys(frame);
++      ensureFilter(frame);
+       await connecting;
+     } catch (err) {
+       setMessage(`Could not start the game: ${err?.message ?? err}`);
+@@ -184,6 +199,7 @@
+       persist();
+       render();
+       if (bridge.isWorld()) { try { bridge.setMode?.(state.settings.mode); } catch { /* reported by the engine state */ } }
++      try { frameFilter?.setMode(state.settings.mode); } catch { /* filter is best-effort */ }
+     },
+     setSetting: (key, value) => { state = setSetting(state, key, value); persist(); render(); },
+     pickRebindAction: (action) => { state = beginRebind(state, "keyboard", action); render(); },
+@@ -261,7 +277,10 @@
+   // a world-ready engine applies the persisted mode + reveals the HUD/stick.
+   bridge.onPhase?.((phase) => {
+     if (phase === "error") { setMessage(bridge.error || "The game engine did not load."); return; }
+-    if (phase === "world") { try { bridge.setMode?.(state.settings.mode); } catch { /* ignore */ } }
++    if (phase === "world") {
++      try { bridge.setMode?.(state.settings.mode); } catch { /* ignore */ }
++      try { frameFilter?.attach(); } catch { /* filter is best-effort */ }
++    }
+     render();
+   });
+ 
+@@ -320,6 +339,7 @@
+     back: () => A.back(),
+     pressButton: (id, down) => dispatchAction(buttonAction(currentBindings(state), id), { down: down !== false }),
+     pushStick: (x, y) => { const a = stickAction(x, y); if (a) dispatchAction(a, { down: true }); return a; },
++    filterStats: () => frameFilter?.stats() ?? null,
+     render,
+     state: snapshot(),
+   };
